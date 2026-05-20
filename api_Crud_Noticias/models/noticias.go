@@ -11,7 +11,7 @@ import (
 )
 
 type Noticias struct {
-	Id                int       `orm:"column(id_noticia);pk"`
+	Id                int       `orm:"column(id_noticia);pk;auto"`
 	Titulo            string    `orm:"column(titulo)"`
 	Tipo              string    `orm:"column(tipo)"`
 	Cuerpo            string    `orm:"column(cuerpo);null"`
@@ -23,8 +23,8 @@ type Noticias struct {
 	AccesoLimitado    bool      `orm:"column(acceso_limitado)"`
 	Estado            string    `orm:"column(estado)"`
 	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`
 }
 
 func (t *Noticias) TableName() string {
