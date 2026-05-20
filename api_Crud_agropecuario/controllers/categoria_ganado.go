@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	":/Users/MAURICIO/OneDrive/Documentos/ADSO/AgroCampo/AgroCampo_Apis_Crud_Beego/api_Crud_agropecuario/models"
+	"API_CRUD_AGROPECUARIO/models"
 	"encoding/json"
 	"errors"
 	"strconv"
