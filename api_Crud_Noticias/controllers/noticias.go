@@ -36,12 +36,12 @@ func (c *NoticiasController) Post() {
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddNoticias(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = v
+			c.Data["json"] = map[string]interface{}{"success": true, "status":201, "Message": "Peticion exitosa Post", "data": v}
 		} else {
-			c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"success": false, "status":400, "Message": "Error en el servidor Post: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": false, "status":400, "Message": "Error en el servidor Post: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 	}
 	c.ServeJSON()
 }
@@ -58,9 +58,9 @@ func (c *NoticiasController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetNoticiasById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": true, "status":400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}//Se agrega como mejora a la api, para crear una interfas mejor con el map
 	} else {
-		c.Data["json"] = v
+		c.Data["json"] = map[string]interface{}{"success": true, "status":200, "Message": "Peticion exitosa GetOne", "data": v}
 	}
 	c.ServeJSON()
 }
@@ -123,7 +123,11 @@ func (c *NoticiasController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = l
+		if l==nil{
+			c.Data["json"] = map[string]interface{}{"success": true, "status":400, "Message": "Peticion exitosa GetAll: No se encontraron registros"}
+		} else {
+			c.Data["json"] = map[string]interface{}{"success": true, "status":200, "Message": "Peticion exitosa GetAll", "data": l}
+		}
 	}
 	c.ServeJSON()
 }
@@ -142,12 +146,12 @@ func (c *NoticiasController) Put() {
 	v := models.Noticias{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if err := models.UpdateNoticiasById(&v); err == nil {
-			c.Data["json"] = "OK"
+			c.Data["json"] = map[string]interface{}{"success": true, "status":200, "Message": "Peticion exitosa Put"}
 		} else {
-			c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"success": false, "status":400, "Message": "Error en el servidor Put: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": false, "status":400, "Message": "Error en el servidor Put: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 	}
 	c.ServeJSON()
 }
@@ -163,9 +167,9 @@ func (c *NoticiasController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	if err := models.DeleteNoticias(id); err == nil {
-		c.Data["json"] = "OK"
+		c.Data["json"] = map[string]interface{}{"success": true, "status":200, "Message": "Peticion exitosa Delete", "id": id}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": false, "status":400, "Message": "Error en el servidor Delete: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 	}
 	c.ServeJSON()
 }
