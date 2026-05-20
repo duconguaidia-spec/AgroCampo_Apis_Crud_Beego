@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	":/Users/ducon/OneDrive/Escritorio/Trabajos Del SENA/go/AgroCampo_Apis_Crud_Beego/api_Crud_Noticias/models"
+	"API_CRUD_NOTICIAS/models"
 	"encoding/json"
 	"errors"
 	"strconv"
