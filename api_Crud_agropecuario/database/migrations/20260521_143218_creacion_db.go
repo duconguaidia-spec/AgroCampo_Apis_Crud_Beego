@@ -2,6 +2,9 @@ package main
 
 import (
 	"github.com/beego/beego/v2/client/orm/migration"
+	"io/ioutil"
+	"fmt"
+	"strings"
 )
 
 // DO NOT MODIFY
@@ -19,12 +22,29 @@ func init() {
 
 // Run the migrations
 func (m *CreacionDb_20260521_143218) Up() {
-	// use m.SQL("CREATE TABLE ...") to make schema update
+	file, err := ioutil.ReadFile("../database/migrations/20260521_143218_creacion_db.up.sql")
+	if err != nil {
+		fmt.Println(err)
+	}
+	requests := strings.Split(string(file), ";")
 
+	for _, request := range requests {
+		fmt.Println(request)
+		m.SQL(request)
+	}
 }
 
 // Reverse the migrations
 func (m *CreacionDb_20260521_143218) Down() {
 	// use m.SQL("DROP TABLE ...") to reverse schema update
+	file, err := ioutil.ReadFile("../database/migrations/20260521_143218_creacion_db.down.sql")
+	if err != nil {
+		fmt.Println(err)
+	}
+	requests := strings.Split(string(file), ";")
+	for _, request := range requests {
+		fmt.Println(request)
+		m.SQL(request)
+	}
 
 }
