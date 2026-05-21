@@ -1,6 +1,6 @@
-CREATE SCHEMA IF NOT EXISTS pedidos;
+CREATE SCHEMA IF NOT EXISTS Noticias;
 
-CREATE TABLE Noticias ( 
+CREATE TABLE Noticias.Noticias ( 
     id_noticia SERIAL PRIMARY KEY, 
     titulo VARCHAR(150) NOT NULL, 
     tipo VARCHAR(20) NOT NULL, 

@@ -7,7 +7,7 @@ import (
 
 func init() {
 
-    beego.GlobalControllerRouter["api_Crud_Noticias/controllers:NoticiasController"] = append(beego.GlobalControllerRouter["api_Crud_Noticias/controllers:NoticiasController"],
+    beego.GlobalControllerRouter["API_CRUD_NOTICIAS/controllers:NoticiasController"] = append(beego.GlobalControllerRouter["API_CRUD_NOTICIAS/controllers:NoticiasController"],
         beego.ControllerComments{
             Method: "Post",
             Router: `/`,
@@ -16,7 +16,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["api_Crud_Noticias/controllers:NoticiasController"] = append(beego.GlobalControllerRouter["api_Crud_Noticias/controllers:NoticiasController"],
+    beego.GlobalControllerRouter["API_CRUD_NOTICIAS/controllers:NoticiasController"] = append(beego.GlobalControllerRouter["API_CRUD_NOTICIAS/controllers:NoticiasController"],
         beego.ControllerComments{
             Method: "GetAll",
             Router: `/`,
@@ -25,7 +25,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["api_Crud_Noticias/controllers:NoticiasController"] = append(beego.GlobalControllerRouter["api_Crud_Noticias/controllers:NoticiasController"],
+    beego.GlobalControllerRouter["API_CRUD_NOTICIAS/controllers:NoticiasController"] = append(beego.GlobalControllerRouter["API_CRUD_NOTICIAS/controllers:NoticiasController"],
         beego.ControllerComments{
             Method: "GetOne",
             Router: `/:id`,
@@ -34,7 +34,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["api_Crud_Noticias/controllers:NoticiasController"] = append(beego.GlobalControllerRouter["api_Crud_Noticias/controllers:NoticiasController"],
+    beego.GlobalControllerRouter["API_CRUD_NOTICIAS/controllers:NoticiasController"] = append(beego.GlobalControllerRouter["API_CRUD_NOTICIAS/controllers:NoticiasController"],
         beego.ControllerComments{
             Method: "Put",
             Router: `/:id`,
@@ -43,7 +43,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["api_Crud_Noticias/controllers:NoticiasController"] = append(beego.GlobalControllerRouter["api_Crud_Noticias/controllers:NoticiasController"],
+    beego.GlobalControllerRouter["API_CRUD_NOTICIAS/controllers:NoticiasController"] = append(beego.GlobalControllerRouter["API_CRUD_NOTICIAS/controllers:NoticiasController"],
         beego.ControllerComments{
             Method: "Delete",
             Router: `/:id`,
