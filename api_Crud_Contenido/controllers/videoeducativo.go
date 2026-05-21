@@ -36,7 +36,7 @@ func (c *VideoeducativoController) Post() {
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddVideoeducativo(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = v
+		c.Data["json"] = v
 		} else {
 			c.Data["json"] = err.Error()
 		}
@@ -123,7 +123,11 @@ func (c *VideoeducativoController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = l
+		if l==nil{
+			c.Data["json"] = map[string]interface{}{"success": true, "status":400, "Message": "Peticion exitosa GetAll: No se encontraron registros"}
+		} else {
+			c.Data["json"] = map[string]interface{}{"success": true, "status":200, "Message": "Peticion exitosa GetAll", "data": l}
+		}
 	}
 	c.ServeJSON()
 }

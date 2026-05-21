@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	beego "github.com/beego/beego/v2/server/web"
+	"github.com/beego/beego/v2/core/logs"
 )
 
 // RespuestaforoController operations for Respuestaforo
@@ -58,12 +59,17 @@ func (c *RespuestaforoController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetRespuestaforoById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		logs.Error(err)
+        c.Data["json"] = map[string]interface{}{"success": true, "status":400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 	} else {
-		c.Data["json"] = v
+		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion exitosa", "data": v}
+		
 	}
+
+
 	c.ServeJSON()
 }
+
 
 // GetAll ...
 // @Title Get All
@@ -123,10 +129,15 @@ func (c *RespuestaforoController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = l
+		if l==nil{
+			c.Data["json"] = map[string]interface{}{"success": true, "status":400, "Message": "Peticion exitosa GetAll: No se encontraron registros"}
+		} else {
+			c.Data["json"] = map[string]interface{}{"success": true, "status":200, "Message": "Peticion exitosa GetAll", "data": l}
+		}
 	}
 	c.ServeJSON()
 }
+
 
 // Put ...
 // @Title Put
@@ -151,7 +162,6 @@ func (c *RespuestaforoController) Put() {
 	}
 	c.ServeJSON()
 }
-
 // Delete ...
 // @Title Delete
 // @Description delete the Respuestaforo

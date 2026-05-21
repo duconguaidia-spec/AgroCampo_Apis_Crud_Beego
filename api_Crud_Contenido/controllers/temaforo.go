@@ -123,7 +123,11 @@ func (c *TemaforoController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = l
+		if l==nil{
+			c.Data["json"] = map[string]interface{}{"success": true, "status":400, "Message": "Peticion exitosa GetAll: No se encontraron registros"}
+		} else {
+			c.Data["json"] = map[string]interface{}{"success": true, "status":200, "Message": "Peticion exitosa GetAll", "data": l}
+		}
 	}
 	c.ServeJSON()
 }
