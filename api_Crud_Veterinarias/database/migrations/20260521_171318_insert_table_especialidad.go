@@ -19,7 +19,7 @@ func init() {
 
 // Run the migrations
 func (m *InsertTableEspecialidad_20260521_171318) Up() {
-	// use m.SQL("CREATE TABLE ...") to make schema update
+	
 
 }
 
