@@ -1,100 +1,18 @@
+-- Down migration: eliminar tablas creadas en la migración de creación
 BEGIN;
 
--- Eliminar datos de las tablas (en orden inverso de dependencias)
-TRUNCATE TABLE "Reportes"."tr_ExportacionDatos" CASCADE;
-TRUNCATE TABLE "Reportes"."ReporteActividad" CASCADE;
-TRUNCATE TABLE "Soporte"."PreguntaFrecuente" CASCADE;
-TRUNCATE TABLE "Soporte"."CategoriaPreguntas" CASCADE;
-TRUNCATE TABLE "Noticias"."Noticia" CASCADE;
-TRUNCATE TABLE "Contenido"."RespuestaForo" CASCADE;
-TRUNCATE TABLE "Contenido"."TemaForo" CASCADE;
-TRUNCATE TABLE "Contenido"."VideoEducativo" CASCADE;
-TRUNCATE TABLE "Contenido"."Categoria" CASCADE;
-TRUNCATE TABLE "Veterinarias"."ResenaVeterinaria" CASCADE;
-TRUNCATE TABLE "Veterinarias"."ProductoVeterinaria" CASCADE;
-TRUNCATE TABLE "Veterinarias"."ServicioVeterinaria" CASCADE;
-TRUNCATE TABLE "Veterinarias"."tr_VeterinariaServicio" CASCADE;
-TRUNCATE TABLE "Veterinarias"."tr_VeterinariaEspecialidad" CASCADE;
-TRUNCATE TABLE "Veterinarias"."Veterinaria" CASCADE;
-TRUNCATE TABLE "Veterinarias"."ServicioGeneral" CASCADE;
-TRUNCATE TABLE "Veterinarias"."Especialidad" CASCADE;
-TRUNCATE TABLE "Agropecuario"."Tr_PrecioSubastaGanado" CASCADE;
-TRUNCATE TABLE "Agropecuario"."Subasta" CASCADE;
-TRUNCATE TABLE "Agropecuario"."CategoriaGanado" CASCADE;
-TRUNCATE TABLE "Usuarios"."PerfilExtendido" CASCADE;
-TRUNCATE TABLE "Usuarios"."AuditoriaUsuario" CASCADE;
-TRUNCATE TABLE "Usuarios"."VerificacionDosPasos" CASCADE;
-TRUNCATE TABLE "Usuarios"."TokenRecuperacion" CASCADE;
-TRUNCATE TABLE "Usuarios"."Contrasena" CASCADE;
-TRUNCATE TABLE "Usuarios"."Usuario" CASCADE;
-TRUNCATE TABLE "Usuarios"."Rol" CASCADE;
+-- Eliminar respuestas de foro primero (depende de temas)
+DROP TABLE IF EXISTS public.respuestaforo CASCADE;
 
--- Eliminar índices
-DROP INDEX IF EXISTS "Usuarios".idx_usuario_id_rol CASCADE;
-DROP INDEX IF EXISTS "Usuarios".idx_contrasena_id_usuario CASCADE;
-DROP INDEX IF EXISTS "Usuarios".idx_tokenrecuperacion_id_usuario CASCADE;
-DROP INDEX IF EXISTS "Usuarios".idx_verificacion_id_usuario CASCADE;
-DROP INDEX IF EXISTS "Usuarios".idx_auditoria_id_usuario CASCADE;
-DROP INDEX IF EXISTS "Usuarios".idx_perfil_id_usuario CASCADE;
-DROP INDEX IF EXISTS "Agropecuario".idx_subasta_id_usuario_registra CASCADE;
-DROP INDEX IF EXISTS "Agropecuario".idx_precio_subasta_id_subasta CASCADE;
-DROP INDEX IF EXISTS "Agropecuario".idx_precio_subasta_id_categoria_ganado CASCADE;
-DROP INDEX IF EXISTS "Veterinarias".idx_veterinaria_id_usuario CASCADE;
-DROP INDEX IF EXISTS "Veterinarias".idx_vet_especialidad_id_veterinaria CASCADE;
-DROP INDEX IF EXISTS "Veterinarias".idx_vet_especialidad_id_especialidad CASCADE;
-DROP INDEX IF EXISTS "Veterinarias".idx_vet_servicio_id_veterinaria CASCADE;
-DROP INDEX IF EXISTS "Veterinarias".idx_vet_servicio_id_servicio_general CASCADE;
-DROP INDEX IF EXISTS "Veterinarias".idx_servicio_veterinaria_id_veterinaria CASCADE;
-DROP INDEX IF EXISTS "Veterinarias".idx_producto_veterinaria_id_veterinaria CASCADE;
-DROP INDEX IF EXISTS "Veterinarias".idx_resena_veterinaria_id_veterinaria CASCADE;
-DROP INDEX IF EXISTS "Veterinarias".idx_resena_veterinaria_id_usuario CASCADE;
-DROP INDEX IF EXISTS "Contenido".idx_videoeducativo_id_usuario CASCADE;
-DROP INDEX IF EXISTS "Contenido".idx_temaforo_id_autor CASCADE;
-DROP INDEX IF EXISTS "Contenido".idx_temaforo_id_categoria CASCADE;
-DROP INDEX IF EXISTS "Contenido".idx_respuestaforo_id_tema CASCADE;
-DROP INDEX IF EXISTS "Contenido".idx_respuestaforo_id_autor CASCADE;
-DROP INDEX IF EXISTS "Noticias".idx_noticia_id_usuario CASCADE;
-DROP INDEX IF EXISTS "Reportes".idx_reporteactividad_id_usuario_solicitante CASCADE;
-DROP INDEX IF EXISTS "Reportes".idx_exportaciondatos_id_usuario CASCADE;
-DROP INDEX IF EXISTS "Reportes".idx_exportaciondatos_id_reporte CASCADE;
-DROP INDEX IF EXISTS "Soporte".idx_preguntafrecuente_id_categoria_faq CASCADE;
+-- Eliminar temas de foro
+DROP TABLE IF EXISTS public.temaforo CASCADE;
 
--- Eliminar tablas (en orden inverso de dependencias)
-DROP TABLE IF EXISTS "Reportes"."tr_ExportacionDatos" CASCADE;
-DROP TABLE IF EXISTS "Reportes"."ReporteActividad" CASCADE;
-DROP TABLE IF EXISTS "Soporte"."PreguntaFrecuente" CASCADE;
-DROP TABLE IF EXISTS "Noticias"."Noticia" CASCADE;
-DROP TABLE IF EXISTS "Contenido"."RespuestaForo" CASCADE;
-DROP TABLE IF EXISTS "Contenido"."TemaForo" CASCADE;
-DROP TABLE IF EXISTS "Contenido"."VideoEducativo" CASCADE;
-DROP TABLE IF EXISTS "Contenido"."Categoria" CASCADE;
-DROP TABLE IF EXISTS "Veterinarias"."ResenaVeterinaria" CASCADE;
-DROP TABLE IF EXISTS "Veterinarias"."ProductoVeterinaria" CASCADE;
-DROP TABLE IF EXISTS "Veterinarias"."ServicioVeterinaria" CASCADE;
-DROP TABLE IF EXISTS "Veterinarias"."tr_VeterinariaServicio" CASCADE;
-DROP TABLE IF EXISTS "Veterinarias"."tr_VeterinariaEspecialidad" CASCADE;
-DROP TABLE IF EXISTS "Veterinarias"."Veterinaria" CASCADE;
-DROP TABLE IF EXISTS "Usuarios"."PerfilExtendido" CASCADE;
-DROP TABLE IF EXISTS "Usuarios"."AuditoriaUsuario" CASCADE;
-DROP TABLE IF EXISTS "Usuarios"."VerificacionDosPasos" CASCADE;
-DROP TABLE IF EXISTS "Usuarios"."TokenRecuperacion" CASCADE;
-DROP TABLE IF EXISTS "Usuarios"."Contrasena" CASCADE;
-DROP TABLE IF EXISTS "Usuarios"."Usuario" CASCADE;
-DROP TABLE IF EXISTS "Usuarios"."Rol" CASCADE;
-DROP TABLE IF EXISTS "Agropecuario"."Tr_PrecioSubastaGanado" CASCADE;
-DROP TABLE IF EXISTS "Agropecuario"."Subasta" CASCADE;
-DROP TABLE IF EXISTS "Agropecuario"."CategoriaGanado" CASCADE;
-DROP TABLE IF EXISTS "Veterinarias"."ServicioGeneral" CASCADE;
-DROP TABLE IF EXISTS "Veterinarias"."Especialidad" CASCADE;
-DROP TABLE IF EXISTS "Soporte"."CategoriaPreguntas" CASCADE;
+-- Eliminar videos educativos
+DROP TABLE IF EXISTS public.videoeducativo CASCADE;
 
--- Eliminar esquemas
-DROP SCHEMA IF EXISTS "Usuarios" CASCADE;
-DROP SCHEMA IF EXISTS "Agropecuario" CASCADE;
-DROP SCHEMA IF EXISTS "Veterinarias" CASCADE;
-DROP SCHEMA IF EXISTS "Contenido" CASCADE;
-DROP SCHEMA IF EXISTS "Noticias" CASCADE;
-DROP SCHEMA IF EXISTS "Reportes" CASCADE;
-DROP SCHEMA IF EXISTS "Soporte" CASCADE;
+-- Finalmente eliminar categorías
+DROP TABLE IF EXISTS public.categoria CASCADE;
 
 COMMIT;
+
+-- Fin de down migration
