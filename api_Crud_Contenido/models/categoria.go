@@ -11,11 +11,11 @@ import (
 )
 
 type Categoria struct {
-	Id                int       `orm:"column(id_categoria);pk"`
+	Id                int       `orm:"column(id_categoria);pk;auto"`
 	NombreCategoria   string    `orm:"column(nombre_categoria)"`
 	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
 }
 
 func (t *Categoria) TableName() string {

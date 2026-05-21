@@ -11,15 +11,15 @@ import (
 )
 
 type Videoeducativo struct {
-	Id                int       `orm:"column(id_video);pk"`
+	Id                int       `orm:"column(id_video);pk;auto"`
 	Titulo            string    `orm:"column(titulo)"`
 	Descripcion       string    `orm:"column(descripcion)"`
 	UrlVideo          string    `orm:"column(url_video)"`
 	IdUsuario         int       `orm:"column(id_usuario)"`
 	Estado            string    `orm:"column(estado)"`
 	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now	"`
 }
 
 func (t *Videoeducativo) TableName() string {
