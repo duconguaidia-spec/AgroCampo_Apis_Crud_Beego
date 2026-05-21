@@ -11,14 +11,14 @@ import (
 )
 
 type Subasta struct {
-	Id                int       `orm:"column(id_subasta);pk"`
+	Id                int       `orm:"column(id_subasta);pk;auto"`
 	FechaSubasta      time.Time `orm:"column(fecha_subasta);type(date)"`
 	Ubicacion         string    `orm:"column(ubicacion);null"`
 	Precio            float64   `orm:"column(precio)"`
 	IdUsuarioRegistra int  `orm:"column(id_usuario_registra);rel(fk)"`
 	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
 }
 
 func (t *Subasta) TableName() string {

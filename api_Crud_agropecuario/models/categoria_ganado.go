@@ -11,12 +11,12 @@ import (
 )
 
 type CategoriaGanado struct {
-	Id                int       `orm:"column(id_categoria_ganado);pk"`
+	Id                int       `orm:"column(id_categoria_ganado);pk;auto"`
 	Codigo            string    `orm:"column(codigo)"`
 	Descripcion       string    `orm:"column(descripcion)"`
 	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
 }
 
 func (t *CategoriaGanado) TableName() string {

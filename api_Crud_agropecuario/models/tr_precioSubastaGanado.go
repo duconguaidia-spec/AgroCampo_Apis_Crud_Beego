@@ -11,12 +11,12 @@ import (
 )
 
 type TrPrecioSubastaGanado struct {
-	Id                int              `orm:"column(id_precio_subasta);pk"`
+	Id                int              `orm:"column(id_precio_subasta);pk;auto"`
 	IdSubasta         *Subasta         `orm:"column(id_subasta);rel(fk)"`
 	IdCategoriaGanado *CategoriaGanado `orm:"column(id_categoria_ganado);rel(fk)"`
 	Activo            bool             `orm:"column(activo)"`
-	FechaCreacion     time.Time        `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time        `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time        `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time        `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
 }
 
 func (t *TrPrecioSubastaGanado) TableName() string {
@@ -41,6 +41,8 @@ func GetTrPrecioSubastaGanadoById(id int) (v *TrPrecioSubastaGanado, err error) 
 	o := orm.NewOrm()
 	v = &TrPrecioSubastaGanado{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v, "IdSubasta")
+		o.LoadRelated(v, "IdCategoriaGanado")
 		return v, nil
 	}
 	return nil, err
@@ -51,7 +53,7 @@ func GetTrPrecioSubastaGanadoById(id int) (v *TrPrecioSubastaGanado, err error) 
 func GetAllTrPrecioSubastaGanado(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(TrPrecioSubastaGanado))
+	qs := o.QueryTable(new(TrPrecioSubastaGanado)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
