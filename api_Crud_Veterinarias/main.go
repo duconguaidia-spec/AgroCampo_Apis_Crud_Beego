@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "api_Crud_Veterinarias/routers"
+	_ "API_CRUD_VETERINARIAS/routers"
 
 	beego "github.com/beego/beego/v2/server/web"
 	beeLogger "github.com/beego/bee/v2/logger"
