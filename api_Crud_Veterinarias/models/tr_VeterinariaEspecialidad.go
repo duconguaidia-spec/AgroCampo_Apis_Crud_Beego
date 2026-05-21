@@ -42,6 +42,8 @@ func GetTrVeterinariaEspecialidadById(id int) (v *TrVeterinariaEspecialidad, err
 	v = &TrVeterinariaEspecialidad{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
+		o.LoadRelated(v, "IdVeterinaria")
+		o.LoadRelated(v, "IdEspecialidad")
 	}
 	return nil, err
 }
@@ -51,7 +53,7 @@ func GetTrVeterinariaEspecialidadById(id int) (v *TrVeterinariaEspecialidad, err
 func GetAllTrVeterinariaEspecialidad(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(TrVeterinariaEspecialidad))
+	qs := o.QueryTable(new(TrVeterinariaEspecialidad)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
