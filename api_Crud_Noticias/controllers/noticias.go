@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -58,6 +59,7 @@ func (c *NoticiasController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetNoticiasById(id)
 	if err != nil {
+		logs.Error(err)
 		c.Data["json"] = map[string]interface{}{"success": true, "status":400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}//Se agrega como mejora a la api, para crear una interfas mejor con el map
 	} else {
 		c.Data["json"] = map[string]interface{}{"success": true, "status":200, "Message": "Peticion exitosa GetOne", "data": v}
