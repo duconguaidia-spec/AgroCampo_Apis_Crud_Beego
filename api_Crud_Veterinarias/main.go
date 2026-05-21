@@ -12,7 +12,7 @@ import (
 func main() {
 	sqlConn,err := beego.AppConfig.String("sqlconn")
 	if err != nil {
-		beeLogger.Log.Fatal("%s", err)
+		beeLogger.Log.Fatal("%s")
 	}
 	orm.RegisterDataBase("default", "postgres", sqlConn)
 	if beego.BConfig.RunMode == "dev" {
