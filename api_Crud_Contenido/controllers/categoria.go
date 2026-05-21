@@ -1,7 +1,9 @@
 package controllers
 
+
+
 import (
-	":/Users/guald/OneDrive/Escritorio/go/AgroCampo_Apis_Crud_Beego/api_Crud_Contenido/models"
+	"api_crud_contenido/models"
 	"encoding/json"
 	"errors"
 	"strconv"
