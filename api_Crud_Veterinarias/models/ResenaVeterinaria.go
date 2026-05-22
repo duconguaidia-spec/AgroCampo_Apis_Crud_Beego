@@ -42,6 +42,7 @@ func GetResenaVeterinariaById(id int) (v *ResenaVeterinaria, err error) {
 	v = &ResenaVeterinaria{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
+		o.LoadRelated(v, "IdVeterinaria")
 	}
 	return nil, err
 }
@@ -51,7 +52,7 @@ func GetResenaVeterinariaById(id int) (v *ResenaVeterinaria, err error) {
 func GetAllResenaVeterinaria(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(ResenaVeterinaria))
+	qs := o.QueryTable(new(ResenaVeterinaria)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

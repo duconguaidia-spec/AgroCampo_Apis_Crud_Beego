@@ -44,7 +44,7 @@ func GetServicioVeterinariaById(id int) (v *ServicioVeterinaria, err error) {
 	v = &ServicioVeterinaria{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
-	}
+		o.LoadRelated(v, "IdVeterinaria")}
 	return nil, err
 }
 
