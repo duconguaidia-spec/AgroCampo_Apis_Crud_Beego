@@ -19,12 +19,16 @@ func init() {
 
 // Run the migrations
 func (m *InsertTableEspecialidad_20260521_171318) Up() {
-	
+	m.SQL("INSERT INTO veterinarias.especialidad (id, nombre) VALUES (1, 'Medicina General');")
+	m.SQL("INSERT INTO veterinarias.especialidad (id, nombre) VALUES (2, 'Cirugía');")
+	m.SQL("INSERT INTO veterinarias.especialidad (id, nombre) VALUES (3, 'Dermatología');")
+	m.SQL("INSERT INTO veterinarias.especialidad (id, nombre) VALUES (4, 'Cardiología');")
+	m.SQL("INSERT INTO veterinarias.especialidad (id, nombre) VALUES (5, 'Neurología');")
 
 }
 
 // Reverse the migrations
 func (m *InsertTableEspecialidad_20260521_171318) Down() {
-	// use m.SQL("DROP TABLE ...") to reverse schema update
+	m.SQL("DELETE FROM veterinarias.especialidad WHERE id IN (1, 2, 3, 4, 5);")
 
 }

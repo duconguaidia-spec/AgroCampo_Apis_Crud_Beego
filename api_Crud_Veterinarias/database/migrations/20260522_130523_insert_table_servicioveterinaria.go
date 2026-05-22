@@ -19,12 +19,14 @@ func init() {
 
 // Run the migrations
 func (m *InsertTableServicioveterinaria_20260522_130523) Up() {
-	// use m.SQL("CREATE TABLE ...") to make schema update
+	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id, id_veterinaria, id_serviciogeneral) VALUES (1, 1, 1);")
+	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id, id_veterinaria, id_serviciogeneral) VALUES (2, 1, 2);")
+	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id, id_veterinaria, id_serviciogeneral) VALUES (3, 2, 1);")
+	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id, id_veterinaria, id_serviciogeneral) VALUES (4, 3, 3);")
+	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id, id_veterinaria, id_serviciogeneral) VALUES (5, 4, 4);")
 
 }
 
 // Reverse the migrations
 func (m *InsertTableServicioveterinaria_20260522_130523) Down() {
-	// use m.SQL("DROP TABLE ...") to reverse schema update
-
-}
+	m.SQ
