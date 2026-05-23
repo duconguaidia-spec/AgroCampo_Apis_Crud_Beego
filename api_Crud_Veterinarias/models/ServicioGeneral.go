@@ -11,12 +11,12 @@ import (
 )
 
 type ServicioGeneral struct {
-	Id                int       `orm:"column(id_servicio_general);pk"`
+	Id                int       `orm:"column(id_servicio_general);pk;auto"`
 	NombreServicio    string    `orm:"column(nombre_servicio)"`
 	Descripcion       string    `orm:"column(descripcion);null"`
 	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
 }
 
 func (t *ServicioGeneral) TableName() string {

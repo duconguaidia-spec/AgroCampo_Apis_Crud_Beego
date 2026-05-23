@@ -11,14 +11,14 @@ import (
 )
 
 type ResenaVeterinaria struct {
-	Id            int          `orm:"column(id_resena);pk"`
+	Id            int          `orm:"column(id_resena);pk;auto"`
 	IdVeterinaria *Veterinaria `orm:"column(id_veterinaria);rel(fk)"`
 	IdUsuario     int          `orm:"column(id_usuario)"`
 	Calificacion  int          `orm:"column(calificacion)"`
 	Comentario    string       `orm:"column(comentario);null"`
 	activo        bool         `orm:"column(activo)"`
-	FechaCreacion time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
 }
 
 func (t *ResenaVeterinaria) TableName() string {

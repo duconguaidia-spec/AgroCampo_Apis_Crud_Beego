@@ -11,12 +11,12 @@ import (
 )
 
 type TrVeterinariaEspecialidad struct {
-	Id                int           `orm:"column(id_vet_especialidad);pk"`
+	Id                int           `orm:"column(id_vet_especialidad);pk;auto"`
 	IdVeterinaria     *Veterinaria  `orm:"column(id_veterinaria);rel(fk)"`
 	IdEspecialidad    *Especialidad `orm:"column(id_especialidad);rel(fk)"`
 	Activo            bool          `orm:"column(activo)"`
-	FechaCreacion     time.Time     `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time     `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time     `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time     `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
 }
 
 func (t *TrVeterinariaEspecialidad) TableName() string {
