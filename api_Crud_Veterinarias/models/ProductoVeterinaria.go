@@ -16,7 +16,7 @@ type ProductoVeterinaria struct {
 	NombreProducto    string       `orm:"column(nombre_producto)"`
 	Descripcion       string       `orm:"column(descripcion);null"`
 	Precio            float64      `orm:"column(precio);null"`
-	Disponible        bool         `orm:"column(disponible)"`
+	Activo            bool         `orm:"column(activo)"`
 	FechaCreacion     time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	FechaModificacion time.Time    `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
 }

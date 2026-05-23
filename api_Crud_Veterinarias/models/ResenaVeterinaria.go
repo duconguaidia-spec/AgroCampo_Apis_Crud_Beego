@@ -16,7 +16,9 @@ type ResenaVeterinaria struct {
 	IdUsuario     int          `orm:"column(id_usuario)"`
 	Calificacion  int          `orm:"column(calificacion)"`
 	Comentario    string       `orm:"column(comentario);null"`
+	activo        bool         `orm:"column(activo)"`
 	FechaCreacion time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
 }
 
 func (t *ResenaVeterinaria) TableName() string {

@@ -19,11 +19,11 @@ func init() {
 
 // Run the migrations
 func (m *InsertTableVeterinaria_20260521_171617) Up() {
-	m.SQL("INSERT INTO veterinarias.veterinaria (id, nombre, direccion, telefono) VALUES (1, 'Veterinaria San Roque', 'Calle 123 #45-67', '555-1234');")
-	m.SQL("INSERT INTO veterinarias.veterinaria (id, nombre, direccion, telefono) VALUES (2, 'Clínica Veterinaria El Bosque', 'Avenida 456 #78-90', '555-5678');")
-	m.SQL("INSERT INTO veterinarias.veterinaria (id, nombre, direccion, telefono) VALUES (3, 'Veterinaria La Mascota Feliz', 'Carrera 789 #12-34', '555-9012');")
-	m.SQL("INSERT INTO veterinarias.veterinaria (id, nombre, direccion, telefono) VALUES (4, 'Clínica Veterinaria El Arca de Noé', 'Calle 321 #54-76', '555-3456');")
-	m.SQL("INSERT INTO veterinarias.veterinaria (id, nombre, direccion, telefono) VALUES (5, 'Veterinaria Amigos Peludos', 'Avenida 654 #87-09', '555-7890');")
+	m.SQL("INSERT INTO veterinarias.veterinaria (nombre_clinica, direccion, telefono, correo_publico, horario_atencion, calificacion_promedio) VALUES ('Veterinaria San Roque', 'Calle 123 #45-67', '555-1234', 'info@veterinariasanroque.com', '08:00 - 20:00', 4.5);")
+	m.SQL("INSERT INTO veterinarias.veterinaria (nombre_clinica, direccion, telefono, correo_publico, horario_atencion, calificacion_promedio) VALUES ('Clínica Veterinaria El Bosque', 'Avenida 456 #78-90', '555-5678', 'contacto@clinicaelbosque.com', '09:00 - 18:00', 4.2);")
+	m.SQL("INSERT INTO veterinarias.veterinaria (nombre_clinica, direccion, telefono, correo_publico, horario_atencion, calificacion_promedio) VALUES ('Veterinaria La Mascota Feliz', 'Carrera 789 #12-34', '555-9012', 'hola@veterinarialamascotafeliz.com', '10:00 - 21:00', 4.8);")
+	m.SQL("INSERT INTO veterinarias.veterinaria (nombre_clinica, direccion, telefono, correo_publico, horario_atencion, calificacion_promedio) VALUES ('Clínica Veterinaria El Arca de Noé', 'Calle 321 #54-76', '555-3456', 'servicio@clinicaelarcaconoé.com', '08:30 - 20:30', 4.6);")
+	m.SQL("INSERT INTO veterinarias.veterinaria (nombre_clinica, direccion, telefono, correo_publico, horario_atencion, calificacion_promedio) VALUES ('Veterinaria Amigos Peludos', 'Avenida 654 #87-09', '555-7890', 'atencion@veterinariaamigospeludos.com', '09:30 - 19:30', 4.4);")
 
 }
 

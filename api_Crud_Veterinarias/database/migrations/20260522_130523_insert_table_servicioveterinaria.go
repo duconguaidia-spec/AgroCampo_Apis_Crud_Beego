@@ -19,11 +19,11 @@ func init() {
 
 // Run the migrations
 func (m *InsertTableServicioveterinaria_20260522_130523) Up() {
-	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id, id_veterinaria, id_serviciogeneral) VALUES (1, 1, 1);")
-	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id, id_veterinaria, id_serviciogeneral) VALUES (2, 1, 2);")
-	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id, id_veterinaria, id_serviciogeneral) VALUES (3, 2, 1);")
-	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id, id_veterinaria, id_serviciogeneral) VALUES (4, 3, 3);")
-	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id, id_veterinaria, id_serviciogeneral) VALUES (5, 4, 4);")
+	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id_veterinaria, nombre_servicio, descripcion, precio, activo) VALUES (1, 'Consulta General', 'Consulta médica general', 50000, TRUE);")
+	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id_veterinaria, nombre_servicio, descripcion, precio, activo) VALUES (1, 'Vacunación', 'Aplicación de vacunas', 30000, TRUE);")
+	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id_veterinaria, nombre_servicio, descripcion, precio, activo) VALUES (2, 'Desparasitación', 'Tratamiento contra parásitos', 40000, TRUE);")
+	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id_veterinaria, nombre_servicio, descripcion, precio, activo) VALUES (3, 'Corte de Uñas', 'Corte y limpieza de uñas', 20000, TRUE);")
+	m.SQL("INSERT INTO veterinarias.servicioveterinaria (id_veterinaria, nombre_servicio, descripcion, precio, activo) VALUES (4, 'Limpieza Dental', 'Limpieza profesional de dientes', 60000, TRUE);")
 
 }
 

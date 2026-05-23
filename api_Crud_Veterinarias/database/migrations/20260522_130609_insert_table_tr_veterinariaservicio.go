@@ -19,11 +19,11 @@ func init() {
 
 // Run the migrations
 func (m *InsertTableTrVeterinariaservicio_20260522_130609) Up() {
-	m.SQL("INSERT INTO veterinarias.tr_veterinariaservicio (id, id_veterinaria, id_serviciogeneral) VALUES (1, 1, 1);")
-	m.SQL("INSERT INTO veterinarias.tr_veterinariaservicio (id, id_veterinaria, id_serviciogeneral) VALUES (2, 1, 2);")
-	m.SQL("INSERT INTO veterinarias.tr_veterinariaservicio (id, id_veterinaria, id_serviciogeneral) VALUES (3, 2, 1);")
-	m.SQL("INSERT INTO veterinarias.tr_veterinariaservicio (id, id_veterinaria, id_serviciogeneral) VALUES (4, 3, 3);")
-	m.SQL("INSERT INTO veterinarias.tr_veterinariaservicio (id, id_veterinaria, id_serviciogeneral) VALUES (5, 4, 4);")
+	m.SQL("INSERT INTO veterinarias.tr_veterinariaservicio (id_veterinaria, id_servicio_general, activo) VALUES (1, 1, TRUE);")
+	m.SQL("INSERT INTO veterinarias.tr_veterinariaservicio (id_veterinaria, id_servicio_general, activo) VALUES (1, 2, TRUE);")
+	m.SQL("INSERT INTO veterinarias.tr_veterinariaservicio (id_veterinaria, id_servicio_general, activo) VALUES (2, 1, TRUE);")
+	m.SQL("INSERT INTO veterinarias.tr_veterinariaservicio (id_veterinaria, id_servicio_general, activo) VALUES (3, 3, TRUE);")
+	m.SQL("INSERT INTO veterinarias.tr_veterinariaservicio (id_veterinaria, id_servicio_general, activo) VALUES (4, 4, TRUE);")
 
 }
 

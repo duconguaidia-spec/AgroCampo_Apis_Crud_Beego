@@ -19,11 +19,11 @@ func init() {
 
 // Run the migrations
 func (m *InsertTableEspecialidad_20260521_171318) Up() {
-	m.SQL("INSERT INTO veterinarias.especialidad (id, nombre) VALUES (1, 'Medicina General');")
-	m.SQL("INSERT INTO veterinarias.especialidad (id, nombre) VALUES (2, 'Cirugía');")
-	m.SQL("INSERT INTO veterinarias.especialidad (id, nombre) VALUES (3, 'Dermatología');")
-	m.SQL("INSERT INTO veterinarias.especialidad (id, nombre) VALUES (4, 'Cardiología');")
-	m.SQL("INSERT INTO veterinarias.especialidad (id, nombre) VALUES (5, 'Neurología');")
+	m.SQL("INSERT INTO veterinarias.especialidad (nombre_especialidad, activo) VALUES ('Medicina General', true);")
+	m.SQL("INSERT INTO veterinarias.especialidad (nombre_especialidad, activo) VALUES ('Cirugía', true);")
+	m.SQL("INSERT INTO veterinarias.especialidad (nombre_especialidad, activo) VALUES ('Dermatología', true);")
+	m.SQL("INSERT INTO veterinarias.especialidad (nombre_especialidad, activo) VALUES ('Cardiología', true);")
+	m.SQL("INSERT INTO veterinarias.especialidad (nombre_especialidad, activo) VALUES ('Neurología', true);")
 
 }
 

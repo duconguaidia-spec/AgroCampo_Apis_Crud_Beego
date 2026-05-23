@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS Veterinarias.ProductoVeterinaria (
     nombre_producto VARCHAR(100) NOT NULL,
     descripcion VARCHAR(255),
     precio NUMERIC(10,2),
-    disponible BOOLEAN NOT NULL DEFAULT TRUE,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
     fecha_creacion TIMESTAMP NOT NULL DEFAULT NOW(),
     fecha_modificacion TIMESTAMP NOT NULL DEFAULT NOW(),
     CONSTRAINT fk_producto_veterinaria
@@ -113,7 +113,9 @@ CREATE TABLE IF NOT EXISTS Veterinarias.ResenaVeterinaria (
     id_usuario INT NOT NULL,
     calificacion INT NOT NULL,
     comentario VARCHAR(500),
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
     fecha_creacion TIMESTAMP NOT NULL DEFAULT NOW(),
+    fecha_modificacion TIMESTAMP NOT NULL DEFAULT NOW(),
     CONSTRAINT fk_resena_veterinaria
         FOREIGN KEY (id_veterinaria)
         REFERENCES Veterinarias.Veterinaria(id_veterinaria)

@@ -19,11 +19,11 @@ func init() {
 
 // Run the migrations
 func (m *InsertTableServiciogeneral_20260521_171502) Up() {
-	m.SQL("INSERT INTO veterinarias.serviciogeneral (id, nombre) VALUES (1, 'Consulta General');")
-	m.SQL("INSERT INTO veterinarias.serviciogeneral (id, nombre) VALUES (2, 'Vacunación');")
-	m.SQL("INSERT INTO veterinarias.serviciogeneral (id, nombre) VALUES (3, 'Desparasitación');")
-	m.SQL("INSERT INTO veterinarias.serviciogeneral (id, nombre) VALUES (4, 'Corte de Uñas');")
-	m.SQL("INSERT INTO veterinarias.serviciogeneral (id, nombre) VALUES (5, 'Limpieza Dental');")
+	m.SQL("INSERT INTO veterinarias.serviciogeneral (nombre_servicio, descripcion, activo) VALUES ('Consulta General', 'Consulta médica general', true);")
+	m.SQL("INSERT INTO veterinarias.serviciogeneral (nombre_servicio, descripcion, activo) VALUES ('Vacunación', 'Aplicación de vacunas', true);")
+	m.SQL("INSERT INTO veterinarias.serviciogeneral (nombre_servicio, descripcion, activo) VALUES ('Desparasitación', 'Tratamiento contra parásitos', true);")
+	m.SQL("INSERT INTO veterinarias.serviciogeneral (nombre_servicio, descripcion, activo) VALUES ('Corte de Uñas', 'Corte y limpieza de uñas', true);")
+	m.SQL("INSERT INTO veterinarias.serviciogeneral (nombre_servicio, descripcion, activo) VALUES ('Limpieza Dental', 'Limpieza profesional de dientes', true);")
 
 }
 
