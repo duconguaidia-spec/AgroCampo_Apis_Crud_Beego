@@ -29,4 +29,6 @@ func (m *InsertTableServicioveterinaria_20260522_130523) Up() {
 
 // Reverse the migrations
 func (m *InsertTableServicioveterinaria_20260522_130523) Down() {
-	m.SQ
+	m.SQL("DELETE FROM veterinarias.servicioveterinaria WHERE id IN (1, 2, 3, 4, 5);")
+
+}
