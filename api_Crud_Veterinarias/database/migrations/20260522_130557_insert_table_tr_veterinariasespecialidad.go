@@ -19,16 +19,16 @@ func init() {
 
 // Run the migrations
 func (m *InsertTableTrVeterinariasespecialidad_20260522_130557) Up() {
-	m.SQL("INSERT INTO veterinarias.tr_veterinariasespecialidad (id_veterinaria, id_especialidad, activo) VALUES (1, 1, TRUE);")
-	m.SQL("INSERT INTO veterinarias.tr_veterinariasespecialidad (id_veterinaria, id_especialidad, activo) VALUES (1, 2, TRUE);")
-	m.SQL("INSERT INTO veterinarias.tr_veterinariasespecialidad (id_veterinaria, id_especialidad, activo) VALUES (2, 1, TRUE);")
-	m.SQL("INSERT INTO veterinarias.tr_veterinariasespecialidad (id_veterinaria, id_especialidad, activo) VALUES (3, 3, TRUE);")
-	m.SQL("INSERT INTO veterinarias.tr_veterinariasespecialidad (id_veterinaria, id_especialidad, activo) VALUES (4, 4, TRUE);")
+	m.SQL("INSERT INTO veterinarias.tr_VeterinariaEspecialidad (id_veterinaria, id_especialidad, activo) VALUES (1, 1, TRUE);")
+	m.SQL("INSERT INTO veterinarias.tr_VeterinariaEspecialidad (id_veterinaria, id_especialidad, activo) VALUES (1, 2, TRUE);")
+	m.SQL("INSERT INTO veterinarias.tr_VeterinariaEspecialidad (id_veterinaria, id_especialidad, activo) VALUES (2, 1, TRUE);")
+	m.SQL("INSERT INTO veterinarias.tr_VeterinariaEspecialidad (id_veterinaria, id_especialidad, activo) VALUES (3, 3, TRUE);")
+	m.SQL("INSERT INTO veterinarias.tr_VeterinariaEspecialidad (id_veterinaria, id_especialidad, activo) VALUES (4, 4, TRUE);")
 
 }
 
 // Reverse the migrations
 func (m *InsertTableTrVeterinariasespecialidad_20260522_130557) Down() {
-	m.SQL("DELETE FROM veterinarias.tr_veterinariasespecialidad WHERE id IN (1, 2, 3, 4, 5);")
+	m.SQL("DELETE FROM veterinarias.tr_VeterinariaEspecialidad WHERE id IN (1, 2, 3, 4, 5);")
 
 }

@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS Veterinarias.Veterinaria (
     correo_publico VARCHAR(100),
     horario_atencion VARCHAR(150),
     calificacion_promedio NUMERIC(3,2) NOT NULL DEFAULT 0,
-    id_usuario INT NOT NULL,
+    id_usuario INT NULL,
     aprobado BOOLEAN NOT NULL DEFAULT FALSE,
     activo BOOLEAN NOT NULL DEFAULT TRUE,
     fecha_creacion TIMESTAMP NOT NULL DEFAULT NOW(),

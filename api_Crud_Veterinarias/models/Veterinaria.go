@@ -18,7 +18,7 @@ type Veterinaria struct {
 	CorreoPublico        string    `orm:"column(correo_publico);null"`
 	HorarioAtencion      string    `orm:"column(horario_atencion);null"`
 	CalificacionPromedio float64   `orm:"column(calificacion_promedio)"`
-	IdUsuario            int       `orm:"column(id_usuario)"`
+	IdUsuario            int       `orm:"column(id_usuario);null"`
 	Aprobado             bool      `orm:"column(aprobado)"`
 	Activo               bool      `orm:"column(activo)"`
 	FechaCreacion        time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
