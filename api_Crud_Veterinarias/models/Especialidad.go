@@ -19,7 +19,7 @@ type Especialidad struct {
 }
 
 func (t *Especialidad) TableName() string {
-	return "Especialidad"
+	return "especialidad"
 }
 
 func init() {

@@ -16,49 +16,49 @@ import (
 func init() {
 	ns := beego.NewNamespace("/v1",
 
-		beego.NSNamespace("/Veterinaria",
+		beego.NSNamespace("/veterinaria",
 			beego.NSInclude(
 				&controllers.VeterinariaController{},
 			),
 		),
 
-		beego.NSNamespace("/tr_VeterinariaEspecialidad",
+		beego.NSNamespace("/tr_veterinariaespecialidad",
 			beego.NSInclude(
 				&controllers.TrVeterinariaEspecialidadController{},
 			),
 		),
 
-		beego.NSNamespace("/Especialidad",
+		beego.NSNamespace("/especialidad",
 			beego.NSInclude(
 				&controllers.EspecialidadController{},
 			),
 		),
 
-		beego.NSNamespace("/tr_VeterinariaServicio",
+		beego.NSNamespace("/tr_veterinariaservicio",
 			beego.NSInclude(
 				&controllers.TrVeterinariaServicioController{},
 			),
 		),
 
-		beego.NSNamespace("/ServicioGeneral",
+		beego.NSNamespace("/serviciogeneral",
 			beego.NSInclude(
 				&controllers.ServicioGeneralController{},
 			),
 		),
 
-		beego.NSNamespace("/ServicioVeterinaria",
+		beego.NSNamespace("/servicioveterinaria",
 			beego.NSInclude(
 				&controllers.ServicioVeterinariaController{},
 			),
 		),
 
-		beego.NSNamespace("/ProductoVeterinaria",
+		beego.NSNamespace("/producto_veterinaria",
 			beego.NSInclude(
 				&controllers.ProductoVeterinariaController{},
 			),
 		),
 
-		beego.NSNamespace("/ResenaVeterinaria",
+		beego.NSNamespace("/resena_veterinaria",
 			beego.NSInclude(
 				&controllers.ResenaVeterinariaController{},
 			),

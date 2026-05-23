@@ -22,7 +22,7 @@ type ResenaVeterinaria struct {
 }
 
 func (t *ResenaVeterinaria) TableName() string {
-	return "ResenaVeterinaria"
+	return "resena_veterinaria"
 }
 
 func init() {

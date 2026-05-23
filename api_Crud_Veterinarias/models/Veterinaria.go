@@ -26,7 +26,7 @@ type Veterinaria struct {
 }
 
 func (t *Veterinaria) TableName() string {
-	return "Veterinaria"
+	return "veterinaria"
 }
 
 func init() {

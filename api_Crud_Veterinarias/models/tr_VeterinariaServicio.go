@@ -20,7 +20,7 @@ type TrVeterinariaServicio struct {
 }
 
 func (t *TrVeterinariaServicio) TableName() string {
-	return "tr_VeterinariaServicio"
+	return "tr_veterinariaservicio"
 }
 
 func init() {
