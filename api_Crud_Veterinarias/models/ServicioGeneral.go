@@ -20,7 +20,7 @@ type ServicioGeneral struct {
 }
 
 func (t *ServicioGeneral) TableName() string {
-	return "servicio_general"
+	return "serviciogeneral"
 }
 
 func init() {

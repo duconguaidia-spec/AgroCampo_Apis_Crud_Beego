@@ -22,7 +22,7 @@ type ServicioVeterinaria struct {
 }
 
 func (t *ServicioVeterinaria) TableName() string {
-	return "servicio_veterinaria"
+	return "servicioveterinaria"
 }
 
 func init() {
@@ -44,7 +44,8 @@ func GetServicioVeterinariaById(id int) (v *ServicioVeterinaria, err error) {
 	v = &ServicioVeterinaria{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
-		o.LoadRelated(v, "IdVeterinaria")}
+		o.LoadRelated(v, "IdVeterinaria")
+	}
 	return nil, err
 }
 

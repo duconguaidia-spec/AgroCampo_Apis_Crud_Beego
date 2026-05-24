@@ -50,10 +50,9 @@ func GetTrVeterinariaServicioById(id int) (v *TrVeterinariaServicio, err error) 
 
 // GetAllTrVeterinariaServicio retrieves all TrVeterinariaServicio matches certain condition. Returns empty list if
 // no records exist
-func GetAllTrVeterinariaServicio(query map[string]string, fields []string, sortby []string, order []string,
-	offset int64, limit int64) (ml []interface{}, err error) {
+func GetAllTrVeterinariaServicio(query map[string]string, fields []string, sortby []string, order []string, offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(TrVeterinariaServicio)).RelatedSel()
+	qs := o.QueryTable((&TrVeterinariaServicio{}).TableName()).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

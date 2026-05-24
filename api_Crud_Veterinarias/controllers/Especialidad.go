@@ -7,7 +7,6 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -59,7 +58,6 @@ func (c *EspecialidadController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetEspecialidadById(id)
 	if err != nil {
-		logs.Error(err)
 		c.Data["json"] = map[string]interface{}{"success": true, "status":400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}//Se agrega como mejora a la api, para crear una interfas mejor con el map
 	} else {
 		c.Data["json"] = map[string]interface{}{"success": true, "status":200, "Message": "Peticion exitosa GetOne", "data": v}
@@ -168,7 +166,7 @@ func (c *EspecialidadController) Put() {
 func (c *EspecialidadController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteEspecialidad(id); err != nil {
+	if err := models.DeleteEspecialidad(id); err == nil {
 		c.Data["json"] = map[string]interface{}{"success": true, "status":200, "Message": "Peticion exitosa Delete", "id": id}
 	} else {
 		c.Data["json"] = map[string]interface{}{"success": false, "status":400, "Message": "Error en el servidor Delete: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}

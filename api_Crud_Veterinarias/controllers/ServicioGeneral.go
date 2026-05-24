@@ -7,11 +7,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
-// ServicioGeneralController operations for ServicioGeneral
+// ServiciogeneralController operations for Serviciogeneral
 type ServicioGeneralController struct {
 	beego.Controller
 }
@@ -27,9 +26,9 @@ func (c *ServicioGeneralController) URLMapping() {
 
 // Post ...
 // @Title Post
-// @Description create ServicioGeneral
-// @Param	body		body 	models.ServicioGeneral	true		"body for ServicioGeneral content"
-// @Success 201 {int} models.ServicioGeneral
+// @Description create Serviciogeneral
+// @Param	body		body 	models.Serviciogeneral	true		"body for Serviciogeneral content"
+// @Success 201 {int} models.Serviciogeneral
 // @Failure 403 body is empty
 // @router / [post]
 func (c *ServicioGeneralController) Post() {
@@ -49,9 +48,9 @@ func (c *ServicioGeneralController) Post() {
 
 // GetOne ...
 // @Title Get One
-// @Description get ServicioGeneral by id
+// @Description get Serviciogeneral by id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.ServicioGeneral
+// @Success 200 {object} models.Serviciogeneral
 // @Failure 403 :id is empty
 // @router /:id [get]
 func (c *ServicioGeneralController) GetOne() {
@@ -59,8 +58,7 @@ func (c *ServicioGeneralController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetServicioGeneralById(id)
 	if err != nil {
-		logs.Error(err)
-		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
+		c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}//Se agrega como mejora a la api, para crear una interfas mejor con el map
 	} else {
 		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa GetOne", "data": v}
 	}
@@ -69,14 +67,14 @@ func (c *ServicioGeneralController) GetOne() {
 
 // GetAll ...
 // @Title Get All
-// @Description get ServicioGeneral
+// @Description get Serviciogeneral
 // @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
 // @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
 // @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
 // @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
-// @Success 200 {object} models.ServicioGeneral
+// @Success 200 {object} models.Serviciogeneral
 // @Failure 403
 // @router / [get]
 func (c *ServicioGeneralController) GetAll() {
@@ -123,9 +121,9 @@ func (c *ServicioGeneralController) GetAll() {
 
 	l, err := models.GetAllServicioGeneral(query, fields, sortby, order, offset, limit)
 	if err != nil {
-		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "Message": "Error en el servidor GetAll: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
+		c.Data["json"] = err.Error()
 	} else {
-		if l == nil {
+		if l==nil{
 			c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Peticion exitosa GetAll: No se encontraron registros"}
 		} else {
 			c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa GetAll", "data": l}
@@ -136,10 +134,10 @@ func (c *ServicioGeneralController) GetAll() {
 
 // Put ...
 // @Title Put
-// @Description update the ServicioGeneral
+// @Description update the Serviciogeneral
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.ServicioGeneral	true		"body for ServicioGeneral content"
-// @Success 200 {object} models.ServicioGeneral
+// @Param	body		body 	models.Serviciogeneral	true		"body for Serviciogeneral content"
+// @Success 200 {object} models.Serviciogeneral
 // @Failure 403 :id is not int
 // @router /:id [put]
 func (c *ServicioGeneralController) Put() {
@@ -160,7 +158,7 @@ func (c *ServicioGeneralController) Put() {
 
 // Delete ...
 // @Title Delete
-// @Description delete the ServicioGeneral
+// @Description delete the Serviciogeneral
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
 // @Failure 403 id is empty
@@ -168,7 +166,7 @@ func (c *ServicioGeneralController) Put() {
 func (c *ServicioGeneralController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteServicioGeneral(id); err != nil {
+	if err := models.DeleteServicioGeneral(id); err == nil {
 		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa Delete", "id": id}
 	} else {
 		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "Message": "Error en el servidor Delete: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}

@@ -7,11 +7,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
-// ServicioVeterinariaController operations for ServicioVeterinaria
+// ServicioveterinariaController operations for Servicioveterinaria
 type ServicioVeterinariaController struct {
 	beego.Controller
 }
@@ -27,9 +26,9 @@ func (c *ServicioVeterinariaController) URLMapping() {
 
 // Post ...
 // @Title Post
-// @Description create ServicioVeterinaria
-// @Param	body		body 	models.ServicioVeterinaria	true		"body for ServicioVeterinaria content"
-// @Success 201 {int} models.ServicioVeterinaria
+// @Description create Servicioveterinaria
+// @Param	body		body 	models.Servicioveterinaria	true		"body for Servicioveterinaria content"
+// @Success 201 {int} models.Servicioveterinaria
 // @Failure 403 body is empty
 // @router / [post]
 func (c *ServicioVeterinariaController) Post() {
@@ -49,9 +48,9 @@ func (c *ServicioVeterinariaController) Post() {
 
 // GetOne ...
 // @Title Get One
-// @Description get ServicioVeterinaria by id
+// @Description get Servicioveterinaria by id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.ServicioVeterinaria
+// @Success 200 {object} models.Servicioveterinaria
 // @Failure 403 :id is empty
 // @router /:id [get]
 func (c *ServicioVeterinariaController) GetOne() {
@@ -59,8 +58,7 @@ func (c *ServicioVeterinariaController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetServicioVeterinariaById(id)
 	if err != nil {
-		logs.Error(err)
-		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
+		c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}//Se agrega como mejora a la api, para crear una interfas mejor con el map
 	} else {
 		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa GetOne", "data": v}
 	}
@@ -69,14 +67,14 @@ func (c *ServicioVeterinariaController) GetOne() {
 
 // GetAll ...
 // @Title Get All
-// @Description get ServicioVeterinaria
+// @Description get Servicioveterinaria
 // @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
 // @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
 // @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
 // @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
-// @Success 200 {object} models.ServicioVeterinaria
+// @Success 200 {object} models.Servicioveterinaria
 // @Failure 403
 // @router / [get]
 func (c *ServicioVeterinariaController) GetAll() {
@@ -123,9 +121,9 @@ func (c *ServicioVeterinariaController) GetAll() {
 
 	l, err := models.GetAllServicioVeterinaria(query, fields, sortby, order, offset, limit)
 	if err != nil {
-		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "Message": "Error en el servidor GetAll: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
+		c.Data["json"] = err.Error()
 	} else {
-		if l == nil {
+		if l==nil{
 			c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Peticion exitosa GetAll: No se encontraron registros"}
 		} else {
 			c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa GetAll", "data": l}
@@ -136,10 +134,10 @@ func (c *ServicioVeterinariaController) GetAll() {
 
 // Put ...
 // @Title Put
-// @Description update the ServicioVeterinaria
+// @Description update the Servicioveterinaria
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.ServicioVeterinaria	true		"body for ServicioVeterinaria content"
-// @Success 200 {object} models.ServicioVeterinaria
+// @Param	body		body 	models.Servicioveterinaria	true		"body for Servicioveterinaria content"
+// @Success 200 {object} models.Servicioveterinaria
 // @Failure 403 :id is not int
 // @router /:id [put]
 func (c *ServicioVeterinariaController) Put() {
@@ -160,7 +158,7 @@ func (c *ServicioVeterinariaController) Put() {
 
 // Delete ...
 // @Title Delete
-// @Description delete the ServicioVeterinaria
+// @Description delete the Servicioveterinaria
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
 // @Failure 403 id is empty
@@ -168,7 +166,7 @@ func (c *ServicioVeterinariaController) Put() {
 func (c *ServicioVeterinariaController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteServicioVeterinaria(id); err != nil {
+	if err := models.DeleteServicioVeterinaria(id); err == nil {
 		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa Delete", "id": id}
 	} else {
 		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "Message": "Error en el servidor Delete: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}

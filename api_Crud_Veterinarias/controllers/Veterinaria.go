@@ -7,7 +7,6 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -59,8 +58,7 @@ func (c *VeterinariaController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetVeterinariaById(id)
 	if err != nil {
-		logs.Error(err)
-		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
+		c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}//Se agrega como mejora a la api, para crear una interfas mejor con el map
 	} else {
 		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa GetOne", "data": v}
 	}
@@ -123,9 +121,9 @@ func (c *VeterinariaController) GetAll() {
 
 	l, err := models.GetAllVeterinaria(query, fields, sortby, order, offset, limit)
 	if err != nil {
-		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "Message": "Error en el servidor GetAll: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
+		c.Data["json"] = err.Error()
 	} else {
-		if l == nil {
+		if l==nil{
 			c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Peticion exitosa GetAll: No se encontraron registros"}
 		} else {
 			c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa GetAll", "data": l}
@@ -168,10 +166,10 @@ func (c *VeterinariaController) Put() {
 func (c *VeterinariaController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteVeterinaria(id); err != nil {
-		c.Data["json"] = map[string]interface{}{"success": true, "status":200, "Message": "Peticion exitosa Delete", "id": id}
+	if err := models.DeleteVeterinaria(id); err == nil {
+		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa Delete", "id": id}
 	} else {
-		c.Data["json"] = map[string]interface{}{"success": false, "status":400, "Message": "Error en el servidor Delete: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
+		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "Message": "Error en el servidor Delete: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 	}
 	c.ServeJSON()
 }
