@@ -168,7 +168,7 @@ func (c *ServicioGeneralController) Put() {
 func (c *ServicioGeneralController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteServicioGeneral(id); err == nil {
+	if err := models.DeleteServicioGeneral(id); err != nil {
 		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa Delete", "id": id}
 	} else {
 		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "Message": "Error en el servidor Delete: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
