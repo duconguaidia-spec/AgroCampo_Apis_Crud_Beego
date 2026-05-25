@@ -1,23 +1,23 @@
 package main
 
 import (
-	"api_crud_soporte/routers"
+	_ "api_crud_soporte/routers"
 	"fmt"
 
+	"github.com/beego/beego/v2/client/orm"
 	"github.com/beego/beego/v2/server/web"
 	"github.com/beego/beego/v2/server/web/filter/cors"
-
-	"github.com/beego/beego/v2/client/orm"
-	beego "github.com/beego/beego/v2/server/web"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
+
+	beego "github.com/beego/beego/v2/server/web"
 )
 
 func main() {
 
 	err := godotenv.Load()
-	if err != nil{
-		panic("Error cargando archivo, env")
+	if err != nil {
+		panic("Error cargando archivo .env")
 	}
 
 	err = beego.LoadAppConfig("ini", "conf/app.conf")
@@ -44,28 +44,34 @@ func main() {
 			pgPort+"/"+
 			pgDb+
 			"?sslmode=disable&search_path="+
-			pgSchema,	
-		)
+			pgSchema,
+	)
 
+	// Permite leer correctamente el body en JSON
+	beego.BConfig.CopyRequestBody = true
 
-	if beego.BConfig.RunMode == "dev" {
-		beego.BConfig.WebConfig.DirectoryIndex = true
-		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
-	}
+	// Evita errores de directorios
+	beego.BConfig.WebConfig.DirectoryIndex = false
+
+	// Configuración swagger
+	beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
+
 	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
 		AllowOrigins: []string{"*"},
 		AllowMethods: []string{"PUT", "PATCH", "GET", "POST", "OPTIONS", "DELETE"},
 		AllowHeaders: []string{
-		 "Origin", 
-		 "x-requested-with",
-		 "content-type",
-		 "accept",
-		 "origin",
-		 "autorization",
-		 "x-csrftoken"},
-		ExposeHeaders: []string{"Content-Length"},
-		AllowCredentials:true,
+			"Origin",
+			"x-requested-with",
+			"content-type",
+			"accept",
+			"origin",
+			"authorization",
+			"x-csrftoken",
+		},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
 	}))
 
+	// Ejecutar servidor
 	beego.Run()
 }

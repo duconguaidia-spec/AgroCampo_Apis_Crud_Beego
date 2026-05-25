@@ -8,7 +8,8 @@
 package routers
 
 import (
-	"API_CRUD_SOPORTE/CONTROLLERS"
+	"api_crud_soporte/controllers"
+	_ "api_crud_soporte/controllers"
 
 	beego "github.com/beego/beego/v2/server/web"
 )

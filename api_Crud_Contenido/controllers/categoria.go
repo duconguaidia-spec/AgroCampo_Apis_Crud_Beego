@@ -1,16 +1,14 @@
 package controllers
 
-
-
 import (
 	"api_crud_contenido/models"
 	"encoding/json"
 	"errors"
+	"github.com/beego/beego/v2/core/logs"
 	"strconv"
 	"strings"
 
 	beego "github.com/beego/beego/v2/server/web"
-	"github.com/beego/beego/v2/core/logs"
 )
 
 // CategoriaController operations for Categoria
@@ -61,13 +59,12 @@ func (c *CategoriaController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetCategoriaById(id)
 	if err != nil {
-        logs.Error(err)
-        c.Data["json"] = map[string]interface{}{"success": true, "status":400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
+		logs.Error(err)
+		c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 	} else {
 		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion exitosa", "data": v}
-		
-	}
 
+	}
 
 	c.ServeJSON()
 }
@@ -130,10 +127,10 @@ func (c *CategoriaController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		if l==nil{
-			c.Data["json"] = map[string]interface{}{"success": true, "status":400, "Message": "Peticion exitosa GetAll: No se encontraron registros"}
+		if l == nil {
+			c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Peticion exitosa GetAll: No se encontraron registros"}
 		} else {
-			c.Data["json"] = map[string]interface{}{"success": true, "status":200, "Message": "Peticion exitosa GetAll", "data": l}
+			c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa GetAll", "data": l}
 		}
 	}
 	c.ServeJSON()
@@ -152,6 +149,7 @@ func (c *CategoriaController) Put() {
 	id, _ := strconv.Atoi(idStr)
 	v := models.Categoria{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		v.Id = id
 		if err := models.UpdateCategoriaById(&v); err == nil {
 			c.Data["json"] = "OK"
 		} else {
@@ -168,15 +166,25 @@ func (c *CategoriaController) Put() {
 // @Description delete the Categoria
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
-// @Failure 403 id is empty
+// @Failure 403 :id is empty
 // @router /:id [delete]
 func (c *CategoriaController) Delete() {
+
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
+
 	if err := models.DeleteCategoria(id); err == nil {
-		c.Data["json"] = "OK"
+
+		c.Data["json"] = map[string]string{
+			"message": "eliminado correctamente",
+		}
+
 	} else {
-		c.Data["json"] = err.Error()
+
+		c.Data["json"] = map[string]string{
+			"error": err.Error(),
+		}
 	}
+
 	c.ServeJSON()
 }

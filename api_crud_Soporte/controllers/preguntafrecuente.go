@@ -4,10 +4,10 @@ import (
 	"api_crud_soporte/models"
 	"encoding/json"
 	"errors"
+	"github.com/beego/beego/v2/core/logs"
+	beego "github.com/beego/beego/v2/server/web"
 	"strconv"
 	"strings"
-
-	beego "github.com/beego/beego/v2/server/web"
 )
 
 // PreguntafrecuenteController operations for Preguntafrecuente
@@ -36,12 +36,12 @@ func (c *PreguntafrecuenteController) Post() {
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddPreguntafrecuente(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = v
+			c.Data["json"] = map[string]interface{}{"success": true, "status": 201, "message": "Peticion exitosa Post", "data": v}
 		} else {
-			c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": "Error en el servidor Post: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": "Error en el servidor Post: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 	}
 	c.ServeJSON()
 }
@@ -58,10 +58,13 @@ func (c *PreguntafrecuenteController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetPreguntafrecuenteById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		logs.Error(err)
+		c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 	} else {
-		c.Data["json"] = v
+		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion exitosa", "data": v}
+
 	}
+
 	c.ServeJSON()
 }
 
@@ -123,7 +126,11 @@ func (c *PreguntafrecuenteController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = l
+		if l == nil {
+			c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Peticion exitosa GetAll: No se encontraron registros"}
+		} else {
+			c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa GetAll", "data": l}
+		}
 	}
 	c.ServeJSON()
 }
@@ -157,15 +164,21 @@ func (c *PreguntafrecuenteController) Put() {
 // @Description delete the Preguntafrecuente
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
-// @Failure 403 id is empty
+// @Failure 403 :id is empty
 // @router /:id [delete]
 func (c *PreguntafrecuenteController) Delete() {
+
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
+
 	if err := models.DeletePreguntafrecuente(id); err == nil {
+
 		c.Data["json"] = "OK"
+
 	} else {
+
 		c.Data["json"] = err.Error()
 	}
+
 	c.ServeJSON()
 }
