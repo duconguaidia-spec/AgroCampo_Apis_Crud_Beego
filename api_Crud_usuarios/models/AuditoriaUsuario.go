@@ -11,12 +11,14 @@ import (
 )
 
 type AuditoriaUsuario struct {
-	Id          int       `orm:"column(id_auditoria);pk;auto"`
-	IdUsuario   *Usuario  `orm:"column(id_usuario);rel(fk)"`
-	TipoEvento  string    `orm:"column(tipo_evento)"`
-	Descripcion string    `orm:"column(descripcion);null"`
-	IpOrigen    string    `orm:"column(ip_origen);null"`
-	FechaEvento time.Time `orm:"column(fecha_evento);type(timestamp without time zone)"`
+	Id                int       `orm:"column(id_auditoria);pk;auto"`
+	IdUsuario         *Usuario  `orm:"column(id_usuario);rel(fk)"`
+	TipoEvento        string    `orm:"column(tipo_evento)"`
+	Descripcion       string    `orm:"column(descripcion);null"`
+	IpOrigen          string    `orm:"column(ip_origen);null"`
+	FechaEvento       time.Time `orm:"column(fecha_evento);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
 }
 
 func (t *AuditoriaUsuario) TableName() string {
@@ -41,6 +43,7 @@ func GetAuditoriaUsuarioById(id int) (v *AuditoriaUsuario, err error) {
 	o := orm.NewOrm()
 	v = &AuditoriaUsuario{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v, "IdUsuario")
 		return v, nil
 	}
 	return nil, err
@@ -51,7 +54,7 @@ func GetAuditoriaUsuarioById(id int) (v *AuditoriaUsuario, err error) {
 func GetAllAuditoriaUsuario(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(AuditoriaUsuario))
+	qs := o.QueryTable(new(AuditoriaUsuario)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

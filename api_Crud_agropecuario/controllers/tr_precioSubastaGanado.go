@@ -3,7 +3,6 @@ package controllers
 import (
 	"API_CRUD_AGROPECUARIO/models"
 	"encoding/json"
-	"errors"
 	"github.com/beego/beego/v2/core/logs"
 	"strconv"
 	"strings"
@@ -112,7 +111,7 @@ func (c *TrPrecioSubastaGanadoController) GetAll() {
 		for _, cond := range strings.Split(v, ",") {
 			kv := strings.SplitN(cond, ":", 2)
 			if len(kv) != 2 {
-				c.Data["json"] = errors.New("Error: invalid query key/value pair")
+				c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": "Error en el servicio GetAll: La solicitud contiene un parametro incorrecto"}
 				c.ServeJSON()
 				return
 			}
@@ -123,7 +122,7 @@ func (c *TrPrecioSubastaGanadoController) GetAll() {
 
 	l, err := models.GetAllTrPrecioSubastaGanado(query, fields, sortby, order, offset, limit)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": "Error en el servicio GetAll: " + err.Error()}
 	} else {
 		if l == nil {
 			c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": "Error en el servicio GetAll: La solicitud contiene un parametro incorrecto o no existe en ningun regitro"}

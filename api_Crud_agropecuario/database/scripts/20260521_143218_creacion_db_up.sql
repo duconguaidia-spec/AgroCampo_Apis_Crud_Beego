@@ -24,11 +24,7 @@ CREATE TABLE IF NOT EXISTS agropecuario.subasta (
     activo boolean NOT NULL DEFAULT true,
     fecha_creacion timestamp without time zone NOT NULL DEFAULT now(),
     fecha_modificacion timestamp without time zone NOT NULL DEFAULT now(),
-    CONSTRAINT "Subasta_pkey" PRIMARY KEY (id_subasta),
-    CONSTRAINT fk_subasta_usuario FOREIGN KEY (id_usuario_registra)
-        REFERENCES usuarios."Usuario" (id_usuario)
-        ON UPDATE CASCADE
-        ON DELETE RESTRICT
+    CONSTRAINT "Subasta_pkey" PRIMARY KEY (id_subasta)
 );
 
 CREATE TABLE IF NOT EXISTS agropecuario."tr_precioSubastaGanado" (

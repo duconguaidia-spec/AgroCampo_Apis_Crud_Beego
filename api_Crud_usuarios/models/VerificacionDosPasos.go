@@ -43,6 +43,7 @@ func GetVerificacionDosPasosById(id int) (v *VerificacionDosPasos, err error) {
 	o := orm.NewOrm()
 	v = &VerificacionDosPasos{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v, "IdUsuario")
 		return v, nil
 	}
 	return nil, err
@@ -53,7 +54,7 @@ func GetVerificacionDosPasosById(id int) (v *VerificacionDosPasos, err error) {
 func GetAllVerificacionDosPasos(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(VerificacionDosPasos))
+	qs := o.QueryTable(new(VerificacionDosPasos)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

@@ -41,6 +41,7 @@ func GetContrasenaById(id int) (v *Contrasena, err error) {
 	o := orm.NewOrm()
 	v = &Contrasena{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v, "IdUsuario")
 		return v, nil
 	}
 	return nil, err
@@ -51,7 +52,7 @@ func GetContrasenaById(id int) (v *Contrasena, err error) {
 func GetAllContrasena(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Contrasena))
+	qs := o.QueryTable(new(Contrasena)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
