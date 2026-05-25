@@ -4,9 +4,9 @@ import (
 	"API_CRUD_AGROPECUARIO/models"
 	"encoding/json"
 	"errors"
+	"github.com/beego/beego/v2/core/logs"
 	"strconv"
 	"strings"
-	"github.com/beego/beego/v2/core/logs"
 
 	beego "github.com/beego/beego/v2/server/web"
 )
@@ -60,11 +60,11 @@ func (c *CategoriaGanadoController) GetOne() {
 	v, err := models.GetCategoriaGanadoById(id)
 	if err != nil {
 		logs.Error(err)
-		c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "message": "Error en el servicio GetOne: La solicitud contiene un parametro incorrecto o no existe en ningun regitro"}
+		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": "Error en el servicio GetOne: La solicitud contiene un parametro incorrecto o no existe en ningun regitro"}
 	} else {
 		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion exitosa", "data": v}
 	}
-	c.ServeJSON() 
+	c.ServeJSON()
 }
 
 // GetAll ...
@@ -124,9 +124,9 @@ func (c *CategoriaGanadoController) GetAll() {
 	l, err := models.GetAllCategoriaGanado(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		c.Data["json"] = err.Error()
-	} else { 
-		if l==nil {
-			c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "message": "Error en el servicio GetAll: La solicitud contiene un parametro incorrecto o no existe en ningun regitro"}
+	} else {
+		if l == nil {
+			c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": "Error en el servicio GetAll: La solicitud contiene un parametro incorrecto o no existe en ningun regitro"}
 		} else {
 			c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion exitosa", "data": l}
 		}

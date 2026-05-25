@@ -15,7 +15,7 @@ type Subasta struct {
 	FechaSubasta      time.Time `orm:"column(fecha_subasta);type(date)"`
 	Ubicacion         string    `orm:"column(ubicacion);null"`
 	Precio            float64   `orm:"column(precio)"`
-	IdUsuarioRegistra int  `orm:"column(id_usuario_registra);rel(fk)"`
+	IdUsuarioRegistra int       `orm:"column(id_usuario_registra)"`
 	Activo            bool      `orm:"column(activo)"`
 	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
 	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
