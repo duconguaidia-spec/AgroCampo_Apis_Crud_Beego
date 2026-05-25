@@ -41,6 +41,7 @@ func GetTokenRecuperacionById(id int) (v *TokenRecuperacion, err error) {
 	o := orm.NewOrm()
 	v = &TokenRecuperacion{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v, "IdUsuario")
 		return v, nil
 	}
 	return nil, err
@@ -51,7 +52,7 @@ func GetTokenRecuperacionById(id int) (v *TokenRecuperacion, err error) {
 func GetAllTokenRecuperacion(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(TokenRecuperacion))
+	qs := o.QueryTable(new(TokenRecuperacion)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
