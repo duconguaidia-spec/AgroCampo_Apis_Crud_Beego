@@ -40,24 +40,3 @@ CREATE TABLE public.videoeducativo (
     fecha_modificacion timestamp without time zone NOT NULL DEFAULT now()
 );
 
--- INSERTS de ejemplo
-INSERT INTO public.categoria (nombre_categoria, activo) VALUES
-    ('Agricultura', true),
-    ('Ganadería', true),
-    ('Tecnología', true);
-
-INSERT INTO public.temaforo (titulo, descripcion, id_autor, id_categoria, estado) VALUES
-    ('Mejoras en riego', 'Discusión sobre técnicas de riego eficientes', 1, 1, 'abierto'),
-    ('Cuidado del ganado', 'Consejos para salud animal', 2, 2, 'abierto'),
-    ('Herramientas digitales', 'Apps útiles para campo', 3, 3, 'abierto');
-
-INSERT INTO public.respuestaforo (id_tema, id_autor, descripcion) VALUES
-    (1, 2, 'Excelente aporte, gracias por compartir'),
-    (1, 3, '¿Podrías compartir fuentes?'),
-    (2, 1, 'Muy útil, aplicaré esto');
-
-INSERT INTO public.videoeducativo (titulo, descripcion, url_video, id_usuario) VALUES
-    ('Uso de drones', 'Introducción al uso de drones en agricultura', 'https://example.com/video1', 1),
-    ('Manejo de suelos', 'Técnicas para mejorar la fertilidad', 'https://example.com/video2', 2);
-
--- Fin de inserts de ejemplo

@@ -3,7 +3,7 @@ package controllers
 import (
 	"api_crud_contenido/models"
 	"encoding/json"
-	"errors"
+	_"errors"
 	"github.com/beego/beego/v2/core/logs"
 	"strconv"
 	"strings"
@@ -37,12 +37,12 @@ func (c *CategoriaController) Post() {
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddCategoria(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = v
+			c.Data["json"] = map[string]interface{}{"success": true, "status":201, "message": "Peticion exitosa Post", "data": v}
 		} else {
-			c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"success": false, "status":400, "message": "Error en el servidor Post: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": false, "status":400, "message": "Error en el servidor Post: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 	}
 	c.ServeJSON()
 }
@@ -60,15 +60,15 @@ func (c *CategoriaController) GetOne() {
 	v, err := models.GetCategoriaById(id)
 	if err != nil {
 		logs.Error(err)
-		c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
+        c.Data["json"] = map[string]interface{}{"success": true, "status":400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 	} else {
 		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion exitosa", "data": v}
-
+		
 	}
+
 
 	c.ServeJSON()
 }
-
 // GetAll ...
 // @Title Get All
 // @Description get Categoria
@@ -114,8 +114,9 @@ func (c *CategoriaController) GetAll() {
 		for _, cond := range strings.Split(v, ",") {
 			kv := strings.SplitN(cond, ":", 2)
 			if len(kv) != 2 {
-				c.Data["json"] = errors.New("Error: invalid query key/value pair")
-				c.ServeJSON()
+
+    c.Data["json"] = map[string]interface{}{"success": false, "status":400, "Message": "Error: invalid query key/value pair"}			
+	c.ServeJSON()
 				return
 			}
 			k, v := kv[0], kv[1]
@@ -124,18 +125,17 @@ func (c *CategoriaController) GetAll() {
 	}
 
 	l, err := models.GetAllCategoria(query, fields, sortby, order, offset, limit)
-	if err != nil {
+if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		if l == nil {
-			c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Peticion exitosa GetAll: No se encontraron registros"}
+		if l==nil{
+			c.Data["json"] = map[string]interface{}{"success": true, "status":400, "Message": "Peticion exitosa GetAll: No se encontraron registros"}
 		} else {
-			c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa GetAll", "data": l}
+			c.Data["json"] = map[string]interface{}{"success": true, "status":200, "Message": "Peticion exitosa GetAll", "data": l}
 		}
 	}
 	c.ServeJSON()
 }
-
 // Put ...
 // @Title Put
 // @Description update the Categoria
@@ -149,7 +149,6 @@ func (c *CategoriaController) Put() {
 	id, _ := strconv.Atoi(idStr)
 	v := models.Categoria{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		v.Id = id
 		if err := models.UpdateCategoriaById(&v); err == nil {
 			c.Data["json"] = "OK"
 		} else {
@@ -174,17 +173,9 @@ func (c *CategoriaController) Delete() {
 	id, _ := strconv.Atoi(idStr)
 
 	if err := models.DeleteCategoria(id); err == nil {
-
-		c.Data["json"] = map[string]string{
-			"message": "eliminado correctamente",
-		}
-
+		c.Data["json"] = "OK"
 	} else {
-
-		c.Data["json"] = map[string]string{
-			"error": err.Error(),
-		}
+		c.Data["json"] = err.Error()
 	}
-
 	c.ServeJSON()
 }

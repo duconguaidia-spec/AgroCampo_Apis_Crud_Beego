@@ -35,18 +35,17 @@ func (c *RespuestaforoController) URLMapping() {
 func (c *RespuestaforoController) Post() {
 	var v models.Respuestaforo
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddRespuestaforo(&v); err == nil {
+			if _, err := models.AddRespuestaforo(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = v
+			c.Data["json"] = map[string]interface{}{"success": true, "status":201, "message": "Peticion exitosa Post", "data": v}
 		} else {
-			c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"success": false, "status":400, "message": "Error en el servidor Post: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": false, "status":400, "message": "Error en el servidor Post: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 	}
 	c.ServeJSON()
 }
-
 // GetOne ...
 // @Title Get One
 // @Description get Respuestaforo by id
