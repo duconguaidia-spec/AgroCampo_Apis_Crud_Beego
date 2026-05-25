@@ -8,7 +8,7 @@
 package routers
 
 import (
-	":/Users/MAURICIO/OneDrive/Documentos/ADSO/AgroCampo/AgroCampo_Apis_Crud_Beego/api_Crud_usuarios/controllers"
+	"api_Crud_usuarios/controllers"
 
 	beego "github.com/beego/beego/v2/server/web"
 )

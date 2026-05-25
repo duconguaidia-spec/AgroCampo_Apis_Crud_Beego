@@ -11,12 +11,12 @@ import (
 )
 
 type Rol struct {
-	Id                int       `orm:"column(id_rol);pk"`
+	Id                int       `orm:"column(id_rol);pk;auto"`
 	NombreRol         string    `orm:"column(nombre_rol)"`
 	Descripcion       string    `orm:"column(descripcion);null"`
 	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
 }
 
 func (t *Rol) TableName() string {

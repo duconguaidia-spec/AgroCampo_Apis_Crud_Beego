@@ -11,14 +11,14 @@ import (
 )
 
 type PerfilExtendido struct {
-	Id                int       `orm:"column(id_perfil);pk"`
+	Id                int       `orm:"column(id_perfil);pk;auto"`
 	IdUsuario         *Usuario  `orm:"column(id_usuario);rel(fk)"`
 	Direccion         string    `orm:"column(direccion);null"`
 	Ciudad            string    `orm:"column(ciudad);null"`
 	Intereses         string    `orm:"column(intereses);null"`
 	RedesSociales     string    `orm:"column(redes_sociales);null"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
 }
 
 func (t *PerfilExtendido) TableName() string {

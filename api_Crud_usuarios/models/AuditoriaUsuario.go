@@ -11,7 +11,7 @@ import (
 )
 
 type AuditoriaUsuario struct {
-	Id          int       `orm:"column(id_auditoria);pk"`
+	Id          int       `orm:"column(id_auditoria);pk;auto"`
 	IdUsuario   *Usuario  `orm:"column(id_usuario);rel(fk)"`
 	TipoEvento  string    `orm:"column(tipo_evento)"`
 	Descripcion string    `orm:"column(descripcion);null"`

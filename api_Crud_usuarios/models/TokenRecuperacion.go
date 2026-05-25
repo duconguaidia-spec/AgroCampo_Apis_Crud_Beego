@@ -11,12 +11,12 @@ import (
 )
 
 type TokenRecuperacion struct {
-	Id            int       `orm:"column(id_token);pk"`
+	Id            int       `orm:"column(id_token);pk;auto"`
 	Token         string    `orm:"column(token)"`
 	IdUsuario     *Usuario  `orm:"column(id_usuario);rel(fk)"`
 	Expiracion    time.Time `orm:"column(expiracion);type(timestamp without time zone)"`
 	Usado         bool      `orm:"column(usado)"`
-	FechaCreacion time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaCreacion time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
 }
 
 func (t *TokenRecuperacion) TableName() string {

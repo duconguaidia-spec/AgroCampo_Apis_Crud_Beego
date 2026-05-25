@@ -11,14 +11,14 @@ import (
 )
 
 type VerificacionDosPasos struct {
-	Id                int       `orm:"column(id_verificacion);pk"`
+	Id                int       `orm:"column(id_verificacion);pk;auto"`
 	IdUsuario         *Usuario  `orm:"column(id_usuario);rel(fk)"`
 	TipoMetodo        string    `orm:"column(tipo_metodo)"`
 	CodigoOtp         string    `orm:"column(codigo_otp);null"`
 	ExpiracionOtp     time.Time `orm:"column(expiracion_otp);type(timestamp without time zone);null"`
 	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
 }
 
 func (t *VerificacionDosPasos) TableName() string {

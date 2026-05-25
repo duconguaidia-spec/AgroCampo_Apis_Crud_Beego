@@ -11,7 +11,7 @@ import (
 )
 
 type Usuario struct {
-	Id                   int       `orm:"column(id_usuario);pk"`
+	Id                   int       `orm:"column(id_usuario);pk;auto"`
 	NombreCompleto       string    `orm:"column(nombre_completo)"`
 	Correo               string    `orm:"column(correo)"`
 	Telefono             string    `orm:"column(telefono);null"`
@@ -19,8 +19,8 @@ type Usuario struct {
 	VerificacionDosPasos bool      `orm:"column(verificacion_dos_pasos)"`
 	Avatar               string    `orm:"column(avatar);null"`
 	Activo               bool      `orm:"column(activo)"`
-	FechaCreacion        time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion    time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion        time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion    time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
 }
 
 func (t *Usuario) TableName() string {
