@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS Noticias.Noticias;
+
+DROP SCHEMA IF EXISTS Noticias;

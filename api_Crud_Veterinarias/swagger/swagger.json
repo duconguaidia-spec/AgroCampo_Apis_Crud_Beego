@@ -1,0 +1,1694 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "beego Test API",
+        "description": "beego has a very cool tools to autogenerate documents for your API\n",
+        "version": "1.0.0",
+        "termsOfService": "http://beego.me/",
+        "contact": {
+            "email": "astaxie@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "basePath": "/v1",
+    "paths": {
+        "/especialidad/": {
+            "get": {
+                "tags": [
+                    "especialidad"
+                ],
+                "description": "get Especialidad\n\u003cbr\u003e",
+                "operationId": "EspecialidadController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Especialidad"
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "especialidad"
+                ],
+                "description": "create Especialidad\n\u003cbr\u003e",
+                "operationId": "EspecialidadController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Especialidad content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Especialidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.Especialidad"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/especialidad/{id}": {
+            "get": {
+                "tags": [
+                    "especialidad"
+                ],
+                "description": "get Especialidad by id\n\u003cbr\u003e",
+                "operationId": "EspecialidadController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Especialidad"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "especialidad"
+                ],
+                "description": "update the Especialidad\n\u003cbr\u003e",
+                "operationId": "EspecialidadController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Especialidad content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Especialidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Especialidad"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "especialidad"
+                ],
+                "description": "delete the Especialidad\n\u003cbr\u003e",
+                "operationId": "EspecialidadController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/producto_veterinaria/": {
+            "get": {
+                "tags": [
+                    "producto_veterinaria"
+                ],
+                "description": "get ProductoVeterinaria\n\u003cbr\u003e",
+                "operationId": "ProductoVeterinariaController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ProductoVeterinaria"
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "producto_veterinaria"
+                ],
+                "description": "create ProductoVeterinaria\n\u003cbr\u003e",
+                "operationId": "ProductoVeterinariaController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for ProductoVeterinaria content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ProductoVeterinaria"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.ProductoVeterinaria"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/producto_veterinaria/{id}": {
+            "get": {
+                "tags": [
+                    "producto_veterinaria"
+                ],
+                "description": "get ProductoVeterinaria by id\n\u003cbr\u003e",
+                "operationId": "ProductoVeterinariaController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ProductoVeterinaria"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "producto_veterinaria"
+                ],
+                "description": "update the ProductoVeterinaria\n\u003cbr\u003e",
+                "operationId": "ProductoVeterinariaController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for ProductoVeterinaria content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ProductoVeterinaria"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ProductoVeterinaria"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "producto_veterinaria"
+                ],
+                "description": "delete the ProductoVeterinaria\n\u003cbr\u003e",
+                "operationId": "ProductoVeterinariaController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/resena_veterinaria/": {
+            "get": {
+                "tags": [
+                    "resena_veterinaria"
+                ],
+                "description": "get ResenaVeterinaria\n\u003cbr\u003e",
+                "operationId": "ResenaVeterinariaController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResenaVeterinaria"
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "resena_veterinaria"
+                ],
+                "description": "create ResenaVeterinaria\n\u003cbr\u003e",
+                "operationId": "ResenaVeterinariaController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for ResenaVeterinaria content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ResenaVeterinaria"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.ResenaVeterinaria"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/resena_veterinaria/{id}": {
+            "get": {
+                "tags": [
+                    "resena_veterinaria"
+                ],
+                "description": "get ResenaVeterinaria by id\n\u003cbr\u003e",
+                "operationId": "ResenaVeterinariaController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResenaVeterinaria"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "resena_veterinaria"
+                ],
+                "description": "update the ResenaVeterinaria\n\u003cbr\u003e",
+                "operationId": "ResenaVeterinariaController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for ResenaVeterinaria content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ResenaVeterinaria"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResenaVeterinaria"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "resena_veterinaria"
+                ],
+                "description": "delete the ResenaVeterinaria\n\u003cbr\u003e",
+                "operationId": "ResenaVeterinariaController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/serviciogeneral/": {
+            "get": {
+                "tags": [
+                    "serviciogeneral"
+                ],
+                "description": "get ServicioGeneral\n\u003cbr\u003e",
+                "operationId": "ServicioGeneralController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ServicioGeneral"
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "serviciogeneral"
+                ],
+                "description": "create ServicioGeneral\n\u003cbr\u003e",
+                "operationId": "ServicioGeneralController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for ServicioGeneral content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ServicioGeneral"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.ServicioGeneral"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/serviciogeneral/{id}": {
+            "get": {
+                "tags": [
+                    "serviciogeneral"
+                ],
+                "description": "get ServicioGeneral by id\n\u003cbr\u003e",
+                "operationId": "ServicioGeneralController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ServicioGeneral"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "serviciogeneral"
+                ],
+                "description": "update the ServicioGeneral\n\u003cbr\u003e",
+                "operationId": "ServicioGeneralController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for ServicioGeneral content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ServicioGeneral"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ServicioGeneral"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "serviciogeneral"
+                ],
+                "description": "delete the ServicioGeneral\n\u003cbr\u003e",
+                "operationId": "ServicioGeneralController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/servicioveterinaria/": {
+            "get": {
+                "tags": [
+                    "servicioveterinaria"
+                ],
+                "description": "get ServicioVeterinaria\n\u003cbr\u003e",
+                "operationId": "ServicioVeterinariaController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ServicioVeterinaria"
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "servicioveterinaria"
+                ],
+                "description": "create ServicioVeterinaria\n\u003cbr\u003e",
+                "operationId": "ServicioVeterinariaController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for ServicioVeterinaria content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ServicioVeterinaria"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.ServicioVeterinaria"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/servicioveterinaria/{id}": {
+            "get": {
+                "tags": [
+                    "servicioveterinaria"
+                ],
+                "description": "get ServicioVeterinaria by id\n\u003cbr\u003e",
+                "operationId": "ServicioVeterinariaController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ServicioVeterinaria"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "servicioveterinaria"
+                ],
+                "description": "update the ServicioVeterinaria\n\u003cbr\u003e",
+                "operationId": "ServicioVeterinariaController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for ServicioVeterinaria content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ServicioVeterinaria"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ServicioVeterinaria"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "servicioveterinaria"
+                ],
+                "description": "delete the ServicioVeterinaria\n\u003cbr\u003e",
+                "operationId": "ServicioVeterinariaController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/tr_veterinariaespecialidad/": {
+            "get": {
+                "tags": [
+                    "tr_veterinariaespecialidad"
+                ],
+                "description": "get TrVeterinariaEspecialidad\n\u003cbr\u003e",
+                "operationId": "TrVeterinariaEspecialidadController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TrVeterinariaEspecialidad"
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "tr_veterinariaespecialidad"
+                ],
+                "description": "create TrVeterinariaEspecialidad\n\u003cbr\u003e",
+                "operationId": "TrVeterinariaEspecialidadController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TrVeterinariaEspecialidad content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TrVeterinariaEspecialidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.TrVeterinariaEspecialidad"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/tr_veterinariaespecialidad/{id}": {
+            "get": {
+                "tags": [
+                    "tr_veterinariaespecialidad"
+                ],
+                "description": "get TrVeterinariaEspecialidad by id\n\u003cbr\u003e",
+                "operationId": "TrVeterinariaEspecialidadController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TrVeterinariaEspecialidad"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "tr_veterinariaespecialidad"
+                ],
+                "description": "update the TrVeterinariaEspecialidad\n\u003cbr\u003e",
+                "operationId": "TrVeterinariaEspecialidadController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TrVeterinariaEspecialidad content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TrVeterinariaEspecialidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TrVeterinariaEspecialidad"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "tr_veterinariaespecialidad"
+                ],
+                "description": "delete the TrVeterinariaEspecialidad\n\u003cbr\u003e",
+                "operationId": "TrVeterinariaEspecialidadController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/tr_veterinariaservicio/": {
+            "get": {
+                "tags": [
+                    "tr_veterinariaservicio"
+                ],
+                "description": "get TrVeterinariaServicio\n\u003cbr\u003e",
+                "operationId": "TrVeterinariaServicioController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TrVeterinariaServicio"
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "tr_veterinariaservicio"
+                ],
+                "description": "create TrVeterinariaServicio\n\u003cbr\u003e",
+                "operationId": "TrVeterinariaServicioController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TrVeterinariaServicio content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TrVeterinariaServicio"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.TrVeterinariaServicio"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/tr_veterinariaservicio/{id}": {
+            "get": {
+                "tags": [
+                    "tr_veterinariaservicio"
+                ],
+                "description": "get TrVeterinariaServicio by id\n\u003cbr\u003e",
+                "operationId": "TrVeterinariaServicioController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TrVeterinariaServicio"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "tr_veterinariaservicio"
+                ],
+                "description": "update the TrVeterinariaServicio\n\u003cbr\u003e",
+                "operationId": "TrVeterinariaServicioController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TrVeterinariaServicio content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TrVeterinariaServicio"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TrVeterinariaServicio"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "tr_veterinariaservicio"
+                ],
+                "description": "delete the TrVeterinariaServicio\n\u003cbr\u003e",
+                "operationId": "TrVeterinariaServicioController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/veterinaria/": {
+            "get": {
+                "tags": [
+                    "veterinaria"
+                ],
+                "description": "get Veterinaria\n\u003cbr\u003e",
+                "operationId": "VeterinariaController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Veterinaria"
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "veterinaria"
+                ],
+                "description": "create Veterinaria\n\u003cbr\u003e",
+                "operationId": "VeterinariaController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Veterinaria content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Veterinaria"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.Veterinaria"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/veterinaria/{id}": {
+            "get": {
+                "tags": [
+                    "veterinaria"
+                ],
+                "description": "get Veterinaria by id\n\u003cbr\u003e",
+                "operationId": "VeterinariaController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Veterinaria"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "veterinaria"
+                ],
+                "description": "update the Veterinaria\n\u003cbr\u003e",
+                "operationId": "VeterinariaController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Veterinaria content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Veterinaria"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Veterinaria"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "veterinaria"
+                ],
+                "description": "delete the Veterinaria\n\u003cbr\u003e",
+                "operationId": "VeterinariaController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Especialidad": {
+            "title": "Especialidad",
+            "type": "object",
+            "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "NombreEspecialidad": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ProductoVeterinaria": {
+            "title": "ProductoVeterinaria",
+            "type": "object",
+            "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
+                "Descripcion": {
+                    "type": "string"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "IdVeterinaria": {
+                    "$ref": "#/definitions/models.Veterinaria"
+                },
+                "NombreProducto": {
+                    "type": "string"
+                },
+                "Precio": {
+                    "type": "number",
+                    "format": "double"
+                }
+            }
+        },
+        "models.ResenaVeterinaria": {
+            "title": "ResenaVeterinaria",
+            "type": "object",
+            "properties": {
+                "Calificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Comentario": {
+                    "type": "string"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "IdUsuario": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "IdVeterinaria": {
+                    "$ref": "#/definitions/models.Veterinaria"
+                },
+                "activo": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "models.ServicioGeneral": {
+            "title": "ServicioGeneral",
+            "type": "object",
+            "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
+                "Descripcion": {
+                    "type": "string"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "NombreServicio": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ServicioVeterinaria": {
+            "title": "ServicioVeterinaria",
+            "type": "object",
+            "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
+                "Descripcion": {
+                    "type": "string"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "IdVeterinaria": {
+                    "$ref": "#/definitions/models.Veterinaria"
+                },
+                "NombreServicio": {
+                    "type": "string"
+                },
+                "Precio": {
+                    "type": "number",
+                    "format": "double"
+                }
+            }
+        },
+        "models.TrVeterinariaEspecialidad": {
+            "title": "TrVeterinariaEspecialidad",
+            "type": "object",
+            "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "IdEspecialidad": {
+                    "$ref": "#/definitions/models.Especialidad"
+                },
+                "IdVeterinaria": {
+                    "$ref": "#/definitions/models.Veterinaria"
+                }
+            }
+        },
+        "models.TrVeterinariaServicio": {
+            "title": "TrVeterinariaServicio",
+            "type": "object",
+            "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "IdServicioGeneral": {
+                    "$ref": "#/definitions/models.ServicioGeneral"
+                },
+                "IdVeterinaria": {
+                    "$ref": "#/definitions/models.Veterinaria"
+                }
+            }
+        },
+        "models.Veterinaria": {
+            "title": "Veterinaria",
+            "type": "object",
+            "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
+                "Aprobado": {
+                    "type": "boolean"
+                },
+                "CalificacionPromedio": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "CorreoPublico": {
+                    "type": "string"
+                },
+                "Direccion": {
+                    "type": "string"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "HorarioAtencion": {
+                    "type": "string"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "IdUsuario": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "NombreClinica": {
+                    "type": "string"
+                },
+                "Telefono": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "veterinaria",
+            "description": "VeterinariaController operations for Veterinaria\n"
+        },
+        {
+            "name": "tr_veterinariaespecialidad",
+            "description": "TrVeterinariaEspecialidadController operations for TrVeterinariaEspecialidad\n"
+        },
+        {
+            "name": "especialidad",
+            "description": "EspecialidadController operations for Especialidad\n"
+        },
+        {
+            "name": "tr_veterinariaservicio",
+            "description": "TrVeterinariaServicioController operations for TrVeterinariaServicio\n"
+        },
+        {
+            "name": "serviciogeneral",
+            "description": "ServicioGeneralController operations for ServicioGeneral\n"
+        },
+        {
+            "name": "servicioveterinaria",
+            "description": "ServicioVeterinariaController operations for ServicioVeterinaria\n"
+        },
+        {
+            "name": "producto_veterinaria",
+            "description": "ProductoVeterinariaController operations for ProductoVeterinaria\n"
+        },
+        {
+            "name": "resena_veterinaria",
+            "description": "ResenaVeterinariaController operations for ResenaVeterinaria\n"
+        }
+    ]
+}
