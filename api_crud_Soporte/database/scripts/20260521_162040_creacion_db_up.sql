@@ -17,11 +17,3 @@ CREATE TABLE PreguntaFrecuente (
     fecha_modificacion timestamp without time zone NOT NULL DEFAULT now(),
 );
 
-INSERT INTO CategoriaPreguntas (nombre_categoria, activo) VALUES
-    ('General', true),
-    ('Técnica', true),
-    ('Administrativa', true);
-
-INSERT INTO PreguntaFrecuente (pregunta, respuesta, id_categoria_faq) VALUES
-    ('¿Cómo puedo restablecer mi contraseña?', 'Para restablecer tu contraseña, haz clic en "Olvidé mi contraseña" en la página de inicio de sesión y sigue las instrucciones.', 1),
-    ('¿Cómo puedo contactar al soporte técnico?', 'Puedes contactar al soporte técnico enviando un correo a soporte@empresa.com', 2);
