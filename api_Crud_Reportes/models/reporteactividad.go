@@ -11,13 +11,13 @@ import (
 )
 
 type Reporteactividad struct {
-	Id                   int       `orm:"column(id_reporte_actividad);pk"`
+	Id                   int       `orm:"column(id_reporte_actividad);pk;auto"`
 	TipoReporte          string    `orm:"column(tipo_reporte)"`
 	FechaInicio          time.Time `orm:"column(fecha_inicio);type(date)"`
 	FechaFin             time.Time `orm:"column(fecha_fin);type(date)"`
 	IdUsuarioSolicitante int       `orm:"column(id_usuario_solicitante)"`
-	Resultado            string    `orm:"column(resultado);null"`
-	FechaGeneracion      time.Time `orm:"column(fecha_generacion);type(timestamp without time zone)"`
+	Resultado            string    `orm:"column(resultado);auto_now"`
+	FechaGeneracion      time.Time `orm:"column(fecha_generacion);type(timestamp without time zone);auto_now_add"`
 }
 
 func (t *Reporteactividad) TableName() string {
