@@ -3,7 +3,6 @@ package controllers
 import (
 	"api_Crud_usuarios/models"
 	"encoding/json"
-	"errors"
 	"strconv"
 	"strings"
 
@@ -36,12 +35,12 @@ func (c *TokenRecuperacionController) Post() {
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddTokenRecuperacion(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = v
+			c.Data["json"] = map[string]interface{}{"success": true, "status": 201, "message": "Peticion exitosa", "data": v}
 		} else {
-			c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": err.Error()}
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": err.Error()}
 	}
 	c.ServeJSON()
 }
@@ -58,9 +57,9 @@ func (c *TokenRecuperacionController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetTokenRecuperacionById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": err.Error()}
 	} else {
-		c.Data["json"] = v
+		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion exitosa", "data": v}
 	}
 	c.ServeJSON()
 }
@@ -110,7 +109,7 @@ func (c *TokenRecuperacionController) GetAll() {
 		for _, cond := range strings.Split(v, ",") {
 			kv := strings.SplitN(cond, ":", 2)
 			if len(kv) != 2 {
-				c.Data["json"] = errors.New("Error: invalid query key/value pair")
+				c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": "Error: invalid query key/value pair"}
 				c.ServeJSON()
 				return
 			}
@@ -121,9 +120,9 @@ func (c *TokenRecuperacionController) GetAll() {
 
 	l, err := models.GetAllTokenRecuperacion(query, fields, sortby, order, offset, limit)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": err.Error()}
 	} else {
-		c.Data["json"] = l
+		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion exitosa", "data": l}
 	}
 	c.ServeJSON()
 }
@@ -142,12 +141,12 @@ func (c *TokenRecuperacionController) Put() {
 	v := models.TokenRecuperacion{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if err := models.UpdateTokenRecuperacionById(&v); err == nil {
-			c.Data["json"] = "OK"
+			c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion exitosa"}
 		} else {
-			c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": err.Error()}
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": err.Error()}
 	}
 	c.ServeJSON()
 }
@@ -163,9 +162,9 @@ func (c *TokenRecuperacionController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	if err := models.DeleteTokenRecuperacion(id); err == nil {
-		c.Data["json"] = "OK"
+		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion exitosa"}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "message": err.Error()}
 	}
 	c.ServeJSON()
 }
