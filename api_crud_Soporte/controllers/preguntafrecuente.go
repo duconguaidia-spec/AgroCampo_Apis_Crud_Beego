@@ -3,7 +3,7 @@ package controllers
 import (
 	"api_crud_soporte/models"
 	"encoding/json"
-	"errors"
+	_"errors"
 	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 	"strconv"
@@ -113,8 +113,8 @@ func (c *PreguntafrecuenteController) GetAll() {
 		for _, cond := range strings.Split(v, ",") {
 			kv := strings.SplitN(cond, ":", 2)
 			if len(kv) != 2 {
-				c.Data["json"] = errors.New("Error: invalid query key/value pair")
-				c.ServeJSON()
+c.Data["json"] = map[string]interface{}{"success": false, "status":400, "Message": "Error: invalid query key/value pair"}				
+c.ServeJSON()
 				return
 			}
 			k, v := kv[0], kv[1]

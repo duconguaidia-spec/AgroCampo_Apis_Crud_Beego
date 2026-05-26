@@ -7,6 +7,3 @@ CREATE TABLE ReporteActividad(
     resultado text,
     fecha_generacion timestamp without time zone NOT NULL DEFAULT now()
 );
-
-INSERT INTO ReporteActividad (tipo_reporte, fecha_inicio, fecha_fin, id_usuario_solicitante) VALUES
-    ('Reporte de actividad por usuario', '2026-01-01', '2026-01-31', 1);

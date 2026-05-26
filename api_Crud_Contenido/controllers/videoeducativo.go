@@ -6,7 +6,7 @@ import (
 	"errors"
 	"strconv"
 	"strings"
-
+    "github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -36,16 +36,15 @@ func (c *VideoeducativoController) Post() {
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddVideoeducativo(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
-		c.Data["json"] = v
+		c.Data["json"] = map[string]interface{}{"success": true, "status":201, "message": "Peticion exitosa Post", "data": v}
 		} else {
-			c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"success": false, "status":400, "message": "Error en el servidor Post: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success": false, "status":400, "message": "Error en el servidor Post: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 	}
 	c.ServeJSON()
 }
-
 // GetOne ...
 // @Title Get One
 // @Description get Videoeducativo by id
@@ -58,13 +57,16 @@ func (c *VideoeducativoController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetVideoeducativoById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		logs.Error(err)
+        c.Data["json"] = map[string]interface{}{"success": true, "status":400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}
 	} else {
-		c.Data["json"] = v
+		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion exitosa", "data": v}
+		
 	}
+
+
 	c.ServeJSON()
 }
-
 // GetAll ...
 // @Title Get All
 // @Description get Videoeducativo

@@ -16,6 +16,7 @@ type Categoria struct {
 	Activo            bool      `orm:"column(activo)" json:"Activo"`
 	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add" json:"FechaCreacion"`
 	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now" json:"FechaModificacion"`
+	
 }
 
 func (t *Categoria) TableName() string {
