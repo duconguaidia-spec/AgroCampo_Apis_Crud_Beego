@@ -10,6 +10,7 @@ import (
 	"github.com/beego/beego/v2/client/orm"
 )
 
+
 type TrPrecioSubastaGanado struct {
 	Id                int              `orm:"column(id);pk;auto" json:"id"`
 	IdSubasta         *Subasta         `orm:"column(subasta_id);rel(fk)" json:"subasta,omitempty"`
