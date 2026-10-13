@@ -11,19 +11,21 @@ import (
 )
 
 type Temaforo struct {
-	Id                int       `orm:"column(id_tema);pk";auto"`
-	Titulo            string    `orm:"column(titulo)"`
-	Descripcion       string    `orm:"column(descripcion)"`
-	IdAutor           int       `orm:"column(id_autor)"`
-	IdCategoria       int       `orm:"column(id_categoria)"`
-	Estado            string    `orm:"column(estado)"`
-	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now	"`
+	Id                int       `orm:"column(id);pk;auto" json:"id"`
+	Titulo            string    `orm:"column(titulo)" json:"titulo"`
+	Descripcion       string    `orm:"column(descripcion)" json:"descripcion"`
+	IdAutor           int       `orm:"column(autor_id)" json:"autor_id"`
+	IdCategoria       int       `orm:"column(categoria_id)" json:"categoria_id"`
+	Estado            string    `orm:"column(estado)" json:"estado"`
+	Urgente           bool      `orm:"column(urgente)" json:"urgente"`
+	Vistas            int       `orm:"column(vistas)" json:"vistas"`
+	Activo            bool      `orm:"column(activo)" json:"activo"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
 }
 
 func (t *Temaforo) TableName() string {
-	return "temaforo"
+	return "temas_foro"
 }
 
 func init() {

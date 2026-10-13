@@ -11,17 +11,17 @@ import (
 )
 
 type Respuestaforo struct {
-	Id                int       `orm:"column(id_respuesta);pk;auto"`
-	IdTema            int       `orm:"column(id_tema)"`
-	IdAutor           int       `orm:"column(id_autor)"`
+	Id                int       `orm:"column(id);pk;auto" json:"id"`
+	IdTema            int       `orm:"column(tema_id)" json:"tema_id"`
+	IdAutor           int       `orm:"column(autor_id)" json:"autor_id"`
 	Descripcion       string    `orm:"column(descripcion)"`
 	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now	"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
 }
 
 func (t *Respuestaforo) TableName() string {
-	return "respuestaforo"
+	return "respuestas_foro"
 }
 
 func init() {

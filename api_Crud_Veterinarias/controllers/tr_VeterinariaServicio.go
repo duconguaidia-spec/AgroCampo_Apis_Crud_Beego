@@ -3,7 +3,6 @@ package controllers
 import (
 	"API_CRUD_VETERINARIAS/models"
 	"encoding/json"
-	"errors"
 	"strconv"
 	"strings"
 
@@ -58,12 +57,13 @@ func (c *TrVeterinariaServicioController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetTrVeterinariaServicioById(id)
 	if err != nil {
-		c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"}//Se agrega como mejora a la api, para crear una interfas mejor con el map
+		c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Error en el servidor GetOne: La solicitud contiene un parametro incorrecto o no existe el recurso solicitado"} //Se agrega como mejora a la api, para crear una interfas mejor con el map
 	} else {
 		c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa GetOne", "data": v}
 	}
 	c.ServeJSON()
 }
+
 // GetAll ...
 // @Title Get All
 // @Description get TrVeterinariaservicio
@@ -109,7 +109,7 @@ func (c *TrVeterinariaServicioController) GetAll() {
 		for _, cond := range strings.Split(v, ",") {
 			kv := strings.SplitN(cond, ":", 2)
 			if len(kv) != 2 {
-				c.Data["json"] = map[string]interface{}{"success": false, "status":400, "Message": "Error: invalid query key/value pair"}
+				c.Data["json"] = map[string]interface{}{"success": false, "status": 400, "Message": "Error: invalid query key/value pair"}
 				c.ServeJSON()
 				return
 			}
@@ -122,7 +122,7 @@ func (c *TrVeterinariaServicioController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		if l==nil{
+		if l == nil {
 			c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "Message": "Peticion exitosa GetAll: No se encontraron registros"}
 		} else {
 			c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "Message": "Peticion exitosa GetAll", "data": l}

@@ -11,22 +11,26 @@ import (
 )
 
 type Veterinaria struct {
-	Id                   int       `orm:"column(id_veterinaria);pk;auto"`
-	NombreClinica        string    `orm:"column(nombre_clinica)"`
-	Direccion            string    `orm:"column(direccion)"`
-	Telefono             string    `orm:"column(telefono)"`
-	CorreoPublico        string    `orm:"column(correo_publico);null"`
-	HorarioAtencion      string    `orm:"column(horario_atencion);null"`
-	CalificacionPromedio float64   `orm:"column(calificacion_promedio)"`
-	IdUsuario            int       `orm:"column(id_usuario);null"`
-	Aprobado             bool      `orm:"column(aprobado)"`
-	Activo               bool      `orm:"column(activo)"`
-	FechaCreacion        time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion    time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
+	Id                int       `orm:"column(id);pk;auto" json:"id"`
+	PropietarioId     *int      `orm:"column(propietario_id);null" json:"propietario_id,omitempty"`
+	NombreClinica     string    `orm:"column(nombre)" json:"nombre"`
+	Descripcion       string    `orm:"column(descripcion);null" json:"descripcion,omitempty"`
+	Direccion         string    `orm:"column(direccion)" json:"direccion"`
+	Ciudad            string    `orm:"column(ciudad)" json:"ciudad"`
+	Departamento      string    `orm:"column(departamento);null" json:"departamento,omitempty"`
+	Telefono          string    `orm:"column(telefono)" json:"telefono"`
+	CorreoPublico     string    `orm:"column(correo_publico);null" json:"correo_publico,omitempty"`
+	HorarioAtencion   string    `orm:"column(horario_atencion);null" json:"horario_atencion,omitempty"`
+	Latitud           *float64  `orm:"column(latitud);null" json:"latitud,omitempty"`
+	Longitud          *float64  `orm:"column(longitud);null" json:"longitud,omitempty"`
+	Aprobado          bool      `orm:"column(aprobado)" json:"aprobado"`
+	Activo            bool      `orm:"column(activo)" json:"activo"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
 }
 
 func (t *Veterinaria) TableName() string {
-	return "veterinaria"
+	return "veterinarias"
 }
 
 func init() {

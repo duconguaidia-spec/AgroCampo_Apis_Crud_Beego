@@ -16,7 +16,7 @@ import (
 func main() {
 
 	err := godotenv.Load()
-	if err != nil{
+	if err != nil {
 		panic("Error cargando archivo, env")
 	}
 
@@ -30,9 +30,9 @@ func main() {
 	pgHost, _ := web.AppConfig.String("PGhost")
 	pgPort, _ := web.AppConfig.String("PGport")
 	pgDb, _ := web.AppConfig.String("PGdb")
-	pgSchema, _ := web.AppConfig.String("PGschema")
+	pgSchema, _ := web.AppConfig.String("PGsschema")
 
-	fmt.Printf("PostgreSQL connection string: postgres://%s:%s@%s:%s/%s?sslmode=disable&search_path=%s\n", pgUser, pgPass, pgHost, pgPort, pgDb, pgSchema)
+	fmt.Printf("PostgreSQL configured database=%s search_path=%s\n", pgDb, pgSchema)
 
 	orm.RegisterDataBase(
 		"default",
@@ -44,9 +44,8 @@ func main() {
 			pgPort+"/"+
 			pgDb+
 			"?sslmode=disable&search_path="+
-			pgSchema,	
-		)
-
+			pgSchema,
+	)
 
 	if beego.BConfig.RunMode == "dev" {
 		beego.BConfig.WebConfig.DirectoryIndex = true
@@ -56,15 +55,15 @@ func main() {
 		AllowOrigins: []string{"*"},
 		AllowMethods: []string{"PUT", "PATCH", "GET", "POST", "OPTIONS", "DELETE"},
 		AllowHeaders: []string{
-		 "Origin", 
-		 "x-requested-with",
-		 "content-type",
-		 "accept",
-		 "origin",
-		 "autorization",
-		 "x-csrftoken"},
-		ExposeHeaders: []string{"Content-Length"},
-		AllowCredentials:true,
+			"Origin",
+			"x-requested-with",
+			"content-type",
+			"accept",
+			"origin",
+			"authorization",
+			"x-csrftoken"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: false,
 	}))
 
 	beego.Run()

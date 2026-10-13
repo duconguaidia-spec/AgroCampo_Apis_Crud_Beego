@@ -11,17 +11,17 @@ import (
 )
 
 type Preguntafrecuente struct {
-	Id                int       `orm:"column(id_faq);pk;auto" json:"id_faq"`
+	Id                int       `orm:"column(id);pk;auto" json:"id"`
 	Pregunta          string    `orm:"column(pregunta)" json:"pregunta"`
 	Respuesta         string    `orm:"column(respuesta)" json:"respuesta"`
-	IdCategoriaFaq    int       `orm:"column(id_categoria_faq)" json:"id_categoria_faq"`
+	IdCategoriaFaq    int       `orm:"column(categoria_id)" json:"categoria_id"`
 	Activo            bool      `orm:"column(activo)" json:"activo"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add" json:"fecha_creacion"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now" json:"fecha_modificacion"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
 }
 
 func (t *Preguntafrecuente) TableName() string {
-	return "preguntafrecuente"
+	return "preguntas_frecuentes"
 }
 
 func init() {

@@ -2,19 +2,18 @@ package main
 
 import (
 	_ "API_CRUD_NOTICIAS/routers"
-	"github.com/beego/beego/v2/server/web/filter/cors"
 	"fmt"
+	"github.com/beego/beego/v2/server/web/filter/cors"
 
-	
 	"github.com/beego/beego/v2/client/orm"
 	beego "github.com/beego/beego/v2/server/web"
-	_ "github.com/lib/pq"
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 )
 
 func main() {
 
-	err:= godotenv.Load()
+	err := godotenv.Load()
 	if err != nil {
 		panic("Error cargando archivo .env")
 	}
@@ -32,7 +31,7 @@ func main() {
 	pgDB, _ := beego.AppConfig.String("PGdb")
 	pgSSchema, _ := beego.AppConfig.String("PGsschema")
 
-	fmt.Println("PosgresSQL connection string: postgres://%s:%s@%s:%s/%s?sslmode=disable&search_path=%s/n", pgUser, pgPass, pgHost, pgPort, pgDB, pgSSchema)
+	fmt.Printf("PostgreSQL configured database=%s search_path=%s\n", pgDB, pgSSchema)
 
 	orm.RegisterDataBase(
 		"default",
@@ -50,20 +49,20 @@ func main() {
 		beego.BConfig.WebConfig.DirectoryIndex = true
 		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
 	}
-    
-	beego.InsertFilter("*", beego.BeforeRouter,cors.Allow(&cors.Options{
-		AllowOrigins:[]string{"*"},
-		AllowMethods:[]string{"PUT","PATCH","GET","POST","OPTIONS","DELETE"},
-		AllowHeaders:[]string{"Origin","x-requested-with",
-		"Origin",
-		"x-requested-with",
-		"content-type",
-		"accept",
-		"origin",
-		"autorization",
-		"x-csrftoken"},
-	ExposeHeaders:[]string{"content-Length"},
-	AllowCredentials:true,
+
+	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{"PUT", "PATCH", "GET", "POST", "OPTIONS", "DELETE"},
+		AllowHeaders: []string{"Origin", "x-requested-with",
+			"Origin",
+			"x-requested-with",
+			"content-type",
+			"accept",
+			"origin",
+			"authorization",
+			"x-csrftoken"},
+		ExposeHeaders:    []string{"content-Length"},
+		AllowCredentials: false,
 	}))
 	beego.Run()
 }

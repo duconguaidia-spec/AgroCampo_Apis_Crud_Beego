@@ -11,16 +11,16 @@ import (
 )
 
 type TrVeterinariaServicio struct {
-	Id                int              `orm:"column(id_vet_servicio);pk;auto"`
-	IdVeterinaria     *Veterinaria     `orm:"column(id_veterinaria);rel(fk)"`
-	IdServicioGeneral *ServicioGeneral `orm:"column(id_servicio_general);rel(fk)"`
+	Id                int              `orm:"column(id);pk;auto" json:"id"`
+	IdVeterinaria     *Veterinaria     `orm:"column(veterinaria_id);rel(fk)" json:"veterinaria,omitempty"`
+	IdServicioGeneral *ServicioGeneral `orm:"column(servicio_general_id);rel(fk)" json:"servicio_general,omitempty"`
 	Activo            bool             `orm:"column(activo)"`
-	FechaCreacion     time.Time        `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion time.Time        `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
+	FechaCreacion     time.Time        `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time        `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
 }
 
 func (t *TrVeterinariaServicio) TableName() string {
-	return "tr_veterinariaservicio"
+	return "veterinaria_servicios"
 }
 
 func init() {

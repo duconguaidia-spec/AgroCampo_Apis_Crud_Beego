@@ -11,18 +11,17 @@ import (
 )
 
 type AuditoriaUsuario struct {
-	Id                int       `orm:"column(id_auditoria);pk;auto"`
-	IdUsuario         *Usuario  `orm:"column(id_usuario);rel(fk)"`
-	TipoEvento        string    `orm:"column(tipo_evento)"`
-	Descripcion       string    `orm:"column(descripcion);null"`
-	IpOrigen          string    `orm:"column(ip_origen);null"`
-	FechaEvento       time.Time `orm:"column(fecha_evento);type(timestamp without time zone)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
+	Id          int       `orm:"column(id);pk;auto" json:"id"`
+	UsuarioId   *int      `orm:"column(usuario_id);null" json:"usuario_id,omitempty"`
+	Accion      string    `orm:"column(accion)" json:"accion"`
+	Entidad     string    `orm:"column(entidad);null" json:"entidad,omitempty"`
+	EntidadId   *int      `orm:"column(entidad_id);null" json:"entidad_id,omitempty"`
+	Detalle     string    `orm:"column(detalle);type(jsonb)" json:"detalle"`
+	FechaEvento time.Time `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
 }
 
 func (t *AuditoriaUsuario) TableName() string {
-	return "AuditoriaUsuario"
+	return "actividad_usuario"
 }
 
 func init() {
@@ -43,7 +42,6 @@ func GetAuditoriaUsuarioById(id int) (v *AuditoriaUsuario, err error) {
 	o := orm.NewOrm()
 	v = &AuditoriaUsuario{Id: id}
 	if err = o.Read(v); err == nil {
-		o.LoadRelated(v, "IdUsuario")
 		return v, nil
 	}
 	return nil, err

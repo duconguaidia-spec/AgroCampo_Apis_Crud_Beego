@@ -11,20 +11,22 @@ import (
 )
 
 type Usuario struct {
-	Id                   int       `orm:"column(id_usuario);pk;auto"`
-	NombreCompleto       string    `orm:"column(nombre_completo)"`
-	Correo               string    `orm:"column(correo)"`
-	Telefono             string    `orm:"column(telefono);null"`
-	IdRol                *Rol      `orm:"column(id_rol);rel(fk)"`
-	VerificacionDosPasos bool      `orm:"column(verificacion_dos_pasos)"`
-	Avatar               string    `orm:"column(avatar);null"`
-	Activo               bool      `orm:"column(activo)"`
-	FechaCreacion        time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion    time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
+	Id                int       `orm:"column(id);pk;auto" json:"id"`
+	NombreCompleto    string    `orm:"column(nombre)" json:"nombre"`
+	Apellido          string    `orm:"column(apellido)" json:"apellido"`
+	Correo            string    `orm:"column(correo)" json:"correo"`
+	Telefono          string    `orm:"column(telefono);null" json:"telefono,omitempty"`
+	IdRol             *Rol      `orm:"column(rol_id);rel(fk)" json:"rol,omitempty"`
+	PasswordHash      string    `orm:"column(password_hash)" json:"-"`
+	Avatar            string    `orm:"column(avatar_url);null" json:"avatar_url,omitempty"`
+	Verificado        bool      `orm:"column(verificado)" json:"verificado"`
+	Activo            bool      `orm:"column(activo)" json:"activo"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
 }
 
 func (t *Usuario) TableName() string {
-	return "Usuario"
+	return "usuarios"
 }
 
 func init() {

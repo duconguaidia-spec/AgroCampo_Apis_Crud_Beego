@@ -11,15 +11,15 @@ import (
 )
 
 type Categoriapreguntas struct {
-	Id                int       `orm:"column(id_categoria_preguntas);pk;auto" json:"id_categoria_preguntas"`
-	NombreCategoria   string    `orm:"column(nombre_categoria)" json:"nombre_categoria"`
+	Id                int       `orm:"column(id);pk;auto" json:"id"`
+	NombreCategoria   string    `orm:"column(nombre)" json:"nombre"`
 	Activo            bool      `orm:"column(activo)" json:"activo"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add" json:"fecha_creacion"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now" json:"fecha_modificacion"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
 }
 
 func (t *Categoriapreguntas) TableName() string {
-	return "categoriapreguntas"
+	return "categorias_faq"
 }
 
 func init() {

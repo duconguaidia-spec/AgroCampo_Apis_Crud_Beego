@@ -11,19 +11,20 @@ import (
 )
 
 type Videoeducativo struct {
-	Id                int       `orm:"column(id_video);pk;auto"`
-	Titulo            string    `orm:"column(titulo)"`
-	Descripcion       string    `orm:"column(descripcion)"`
-	UrlVideo          string    `orm:"column(url_video)"`
-	IdUsuario         int       `orm:"column(id_usuario)"`
-	Estado            string    `orm:"column(estado)"`
-	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now	"`
+	Id                int       `orm:"column(id);pk;auto" json:"id"`
+	CategoriaId       *int      `orm:"column(categoria_id);null" json:"categoria_id,omitempty"`
+	AutorId           *int      `orm:"column(autor_id);null" json:"autor_id,omitempty"`
+	Titulo            string    `orm:"column(titulo)" json:"titulo"`
+	Descripcion       string    `orm:"column(descripcion);null" json:"descripcion,omitempty"`
+	UrlVideo          string    `orm:"column(url_video)" json:"url_video"`
+	ImagenURL         string    `orm:"column(imagen_url);null" json:"imagen_url,omitempty"`
+	Activo            bool      `orm:"column(activo)" json:"activo"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
 }
 
 func (t *Videoeducativo) TableName() string {
-	return "videoeducativo"
+	return "videos_educativos"
 }
 
 func init() {

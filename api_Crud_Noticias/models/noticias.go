@@ -11,20 +11,20 @@ import (
 )
 
 type Noticias struct {
-	Id                int       `orm:"column(id_noticia);pk;auto"`
-	Titulo            string    `orm:"column(titulo)"`
-	Tipo              string    `orm:"column(tipo)"`
-	Cuerpo            string    `orm:"column(cuerpo);null"`
-	UrlVideo          string    `orm:"column(url_video);null"`
-	ImagenDestacada   string    `orm:"column(imagen_destacada)"`
-	Fuente            string    `orm:"column(fuente);null"`
-	FechaNoticia      time.Time `orm:"column(fecha_noticia);type(date);null"`
-	IdUsuario         int       `orm:"column(id_usuario)"`
-	AccesoLimitado    bool      `orm:"column(acceso_limitado)"`
-	Estado            string    `orm:"column(estado)"`
-	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`
+	Id                int        `orm:"column(id);pk;auto" json:"id"`
+	CategoriaId       int        `orm:"column(categoria_id)" json:"categoria_id"`
+	IdUsuario         *int       `orm:"column(autor_id);null" json:"autor_id,omitempty"`
+	Titulo            string     `orm:"column(titulo)" json:"titulo"`
+	Resumen           string     `orm:"column(resumen)" json:"resumen"`
+	Cuerpo            string     `orm:"column(cuerpo);null" json:"cuerpo,omitempty"`
+	Fuente            string     `orm:"column(fuente);null" json:"fuente,omitempty"`
+	ImagenDestacada   string     `orm:"column(imagen_url);null" json:"imagen_url,omitempty"`
+	UrlVideo          string     `orm:"column(url_video);null" json:"url_video,omitempty"`
+	Estado            string     `orm:"column(estado)" json:"estado"`
+	AccesoLimitado    bool       `orm:"column(acceso_limitado)" json:"acceso_limitado"`
+	FechaNoticia      *time.Time `orm:"column(publicada_en);type(timestamp with time zone);null" json:"publicada_en,omitempty"`
+	FechaCreacion     time.Time  `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time  `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
 }
 
 func (t *Noticias) TableName() string {

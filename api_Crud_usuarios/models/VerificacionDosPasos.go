@@ -11,18 +11,18 @@ import (
 )
 
 type VerificacionDosPasos struct {
-	Id                int       `orm:"column(id_verificacion);pk;auto"`
-	IdUsuario         *Usuario  `orm:"column(id_usuario);rel(fk)"`
-	TipoMetodo        string    `orm:"column(tipo_metodo)"`
-	CodigoOtp         string    `orm:"column(codigo_otp);null"`
-	ExpiracionOtp     time.Time `orm:"column(expiracion_otp);type(timestamp without time zone);null"`
-	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
+	Id            int        `orm:"column(id);pk;auto" json:"id"`
+	IdUsuario     *Usuario   `orm:"column(usuario_id);rel(fk)" json:"usuario,omitempty"`
+	Canal         string     `orm:"column(canal)" json:"canal"`
+	CodigoHash    string     `orm:"column(codigo_hash)" json:"-"`
+	ExpiraEn      time.Time  `orm:"column(expira_en);type(timestamp with time zone)" json:"expira_en"`
+	UsadoEn       *time.Time `orm:"column(usado_en);type(timestamp with time zone);null" json:"usado_en,omitempty"`
+	Intentos      int16      `orm:"column(intentos)" json:"intentos"`
+	FechaCreacion time.Time  `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
 }
 
 func (t *VerificacionDosPasos) TableName() string {
-	return "VerificacionDosPasos"
+	return "verificaciones_dos_pasos"
 }
 
 func init() {

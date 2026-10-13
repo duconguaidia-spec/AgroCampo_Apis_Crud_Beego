@@ -11,17 +11,22 @@ import (
 )
 
 type Reporteactividad struct {
-	Id                   int       `orm:"column(id_reporte_actividad);pk;auto"`
-	TipoReporte          string    `orm:"column(tipo_reporte)"`
-	FechaInicio          time.Time `orm:"column(fecha_inicio);type(date)"`
-	FechaFin             time.Time `orm:"column(fecha_fin);type(date)"`
-	IdUsuarioSolicitante int       `orm:"column(id_usuario_solicitante)"`
-	Resultado            string    `orm:"column(resultado);auto_now"`
-	FechaGeneracion      time.Time `orm:"column(fecha_generacion);type(timestamp without time zone);auto_now_add"`
+	Id                   int        `orm:"column(id);pk;auto" json:"id"`
+	TipoReporte          string     `orm:"column(tipo)" json:"tipo"`
+	Formato              string     `orm:"column(formato)" json:"formato"`
+	Filtros              string     `orm:"column(filtros);type(jsonb)" json:"filtros"`
+	IdUsuarioSolicitante *int       `orm:"column(solicitado_por);null" json:"solicitado_por,omitempty"`
+	Resultado            string     `orm:"column(estado)" json:"estado"`
+	ArchivoURL           string     `orm:"column(archivo_url);null" json:"archivo_url,omitempty"`
+	Error                string     `orm:"column(error);null" json:"error,omitempty"`
+	Activo               bool       `orm:"column(activo)" json:"activo"`
+	FechaGeneracion      time.Time  `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion    time.Time  `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
+	FechaCompletado      *time.Time `orm:"column(completado_en);type(timestamp with time zone);null" json:"completado_en,omitempty"`
 }
 
 func (t *Reporteactividad) TableName() string {
-	return "reporteactividad"
+	return "solicitudes_reporte"
 }
 
 func init() {

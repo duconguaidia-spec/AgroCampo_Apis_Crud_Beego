@@ -30,9 +30,9 @@ func main() {
 	pgHost, _ := web.AppConfig.String("PGhost")
 	pgPort, _ := web.AppConfig.String("PGport")
 	pgDb, _ := web.AppConfig.String("PGdb")
-	pgSchema, _ := web.AppConfig.String("PGschema")
+	pgSchema, _ := web.AppConfig.String("PGsschema")
 
-	fmt.Printf("PostgreSQL connection string: postgres://%s:%s@%s:%s/%s?sslmode=disable&search_path=%s\n", pgUser, pgPass, pgHost, pgPort, pgDb, pgSchema)
+	fmt.Printf("PostgreSQL configured database=%s search_path=%s\n", pgDb, pgSchema)
 
 	orm.RegisterDataBase(
 		"default",
@@ -69,7 +69,7 @@ func main() {
 			"x-csrftoken",
 		},
 		ExposeHeaders:    []string{"Content-Length"},
-		AllowCredentials: true,
+		AllowCredentials: false,
 	}))
 
 	// Ejecutar servidor

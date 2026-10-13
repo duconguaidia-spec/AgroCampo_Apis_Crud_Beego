@@ -11,18 +11,19 @@ import (
 )
 
 type ProductoVeterinaria struct {
-	Id                int          `orm:"column(id_producto_vet);pk;auto"`
-	IdVeterinaria     *Veterinaria `orm:"column(id_veterinaria);rel(fk)"`
-	NombreProducto    string       `orm:"column(nombre_producto)"`
-	Descripcion       string       `orm:"column(descripcion);null"`
-	Precio            float64      `orm:"column(precio);null"`
-	Activo            bool         `orm:"column(activo)"`
-	FechaCreacion     time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion time.Time    `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
+	Id                int          `orm:"column(id);pk;auto" json:"id"`
+	IdVeterinaria     *Veterinaria `orm:"column(veterinaria_id);rel(fk)" json:"veterinaria,omitempty"`
+	NombreProducto    string       `orm:"column(nombre)" json:"nombre"`
+	Descripcion       string       `orm:"column(descripcion);null" json:"descripcion,omitempty"`
+	ImagenURL         string       `orm:"column(imagen_url);null" json:"imagen_url,omitempty"`
+	Precio            float64      `orm:"column(precio);null" json:"precio,omitempty"`
+	Activo            bool         `orm:"column(activo)" json:"activo"`
+	FechaCreacion     time.Time    `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time    `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
 }
 
 func (t *ProductoVeterinaria) TableName() string {
-	return "productoveterinaria"
+	return "productos_veterinaria"
 }
 
 func init() {

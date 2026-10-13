@@ -16,21 +16,9 @@ import (
 func init() {
 	ns := beego.NewNamespace("/v1",
 
-		beego.NSNamespace("/VerificacionDosPasos",
-			beego.NSInclude(
-				&controllers.VerificacionDosPasosController{},
-			),
-		),
-
 		beego.NSNamespace("/AuditoriaUsuario",
 			beego.NSInclude(
 				&controllers.AuditoriaUsuarioController{},
-			),
-		),
-
-		beego.NSNamespace("/Contrasena",
-			beego.NSInclude(
-				&controllers.ContrasenaController{},
 			),
 		),
 
@@ -43,12 +31,6 @@ func init() {
 		beego.NSNamespace("/Rol",
 			beego.NSInclude(
 				&controllers.RolController{},
-			),
-		),
-
-		beego.NSNamespace("/TokenRecuperacion",
-			beego.NSInclude(
-				&controllers.TokenRecuperacionController{},
 			),
 		),
 

@@ -11,16 +11,16 @@ import (
 )
 
 type TokenRecuperacion struct {
-	Id            int       `orm:"column(id_token);pk;auto"`
-	Token         string    `orm:"column(token)"`
-	IdUsuario     *Usuario  `orm:"column(id_usuario);rel(fk)"`
-	Expiracion    time.Time `orm:"column(expiracion);type(timestamp without time zone)"`
-	Usado         bool      `orm:"column(usado)"`
-	FechaCreacion time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	Id            int        `orm:"column(id);pk;auto" json:"id"`
+	TokenHash     string     `orm:"column(token_hash)" json:"-"`
+	IdUsuario     *Usuario   `orm:"column(usuario_id);rel(fk)" json:"usuario,omitempty"`
+	ExpiraEn      time.Time  `orm:"column(expira_en);type(timestamp with time zone)" json:"expira_en"`
+	UsadoEn       *time.Time `orm:"column(usado_en);type(timestamp with time zone);null" json:"usado_en,omitempty"`
+	FechaCreacion time.Time  `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
 }
 
 func (t *TokenRecuperacion) TableName() string {
-	return "TokenRecuperacion"
+	return "tokens_recuperacion"
 }
 
 func init() {

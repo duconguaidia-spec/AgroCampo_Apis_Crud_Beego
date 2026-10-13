@@ -11,18 +11,15 @@ import (
 )
 
 type PerfilExtendido struct {
-	Id                int       `orm:"column(id_perfil);pk;auto"`
-	IdUsuario         *Usuario  `orm:"column(id_usuario);rel(fk)"`
-	Direccion         string    `orm:"column(direccion);null"`
-	Ciudad            string    `orm:"column(ciudad);null"`
-	Intereses         string    `orm:"column(intereses);null"`
-	RedesSociales     string    `orm:"column(redes_sociales);null"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
+	Id                int       `orm:"column(usuario_id);pk" json:"usuario_id"`
+	Ubicacion         string    `orm:"column(ubicacion);null" json:"ubicacion,omitempty"`
+	Activo            bool      `orm:"column(activo)" json:"activo"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
 }
 
 func (t *PerfilExtendido) TableName() string {
-	return "PerfilExtendido"
+	return "perfiles"
 }
 
 func init() {
@@ -43,7 +40,6 @@ func GetPerfilExtendidoById(id int) (v *PerfilExtendido, err error) {
 	o := orm.NewOrm()
 	v = &PerfilExtendido{Id: id}
 	if err = o.Read(v); err == nil {
-		o.LoadRelated(v, "IdUsuario")
 		return v, nil
 	}
 	return nil, err
