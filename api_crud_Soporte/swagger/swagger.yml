@@ -1,0 +1,311 @@
+swagger: "2.0"
+info:
+  title: beego Test API
+  description: |
+    beego has a very cool tools to autogenerate documents for your API
+  version: 1.0.0
+  termsOfService: http://beego.me/
+  contact:
+    email: astaxie@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /v1
+paths:
+  /categoriapreguntas/:
+    get:
+      tags:
+      - categoriapreguntas
+      description: |-
+        get Categoriapreguntas
+        <br>
+      operationId: CategoriapreguntasController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Categoriapreguntas'
+        "403":
+          description: ""
+    post:
+      tags:
+      - categoriapreguntas
+      description: |-
+        create Categoriapreguntas
+        <br>
+      operationId: CategoriapreguntasController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Categoriapreguntas content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Categoriapreguntas'
+      responses:
+        "201":
+          description: '{int} models.Categoriapreguntas'
+        "403":
+          description: body is empty
+  /categoriapreguntas/{id}:
+    get:
+      tags:
+      - categoriapreguntas
+      description: |-
+        get Categoriapreguntas by id
+        <br>
+      operationId: CategoriapreguntasController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Categoriapreguntas'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - categoriapreguntas
+      description: |-
+        update the Categoriapreguntas
+        <br>
+      operationId: CategoriapreguntasController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Categoriapreguntas content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Categoriapreguntas'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Categoriapreguntas'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - categoriapreguntas
+      description: |-
+        delete the Categoriapreguntas
+        <br>
+      operationId: CategoriapreguntasController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /preguntafrecuente/:
+    get:
+      tags:
+      - preguntafrecuente
+      description: |-
+        get Preguntafrecuente
+        <br>
+      operationId: PreguntafrecuenteController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Preguntafrecuente'
+        "403":
+          description: ""
+    post:
+      tags:
+      - preguntafrecuente
+      description: |-
+        create Preguntafrecuente
+        <br>
+      operationId: PreguntafrecuenteController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Preguntafrecuente content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Preguntafrecuente'
+      responses:
+        "201":
+          description: '{int} models.Preguntafrecuente'
+        "403":
+          description: body is empty
+  /preguntafrecuente/{id}:
+    get:
+      tags:
+      - preguntafrecuente
+      description: |-
+        get Preguntafrecuente by id
+        <br>
+      operationId: PreguntafrecuenteController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Preguntafrecuente'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - preguntafrecuente
+      description: |-
+        update the Preguntafrecuente
+        <br>
+      operationId: PreguntafrecuenteController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Preguntafrecuente content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Preguntafrecuente'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Preguntafrecuente'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - preguntafrecuente
+      description: |-
+        delete the Preguntafrecuente
+        <br>
+      operationId: PreguntafrecuenteController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+definitions:
+  models.Categoriapreguntas:
+    title: Categoriapreguntas
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      NombreCategoria:
+        type: string
+  models.Preguntafrecuente:
+    title: Preguntafrecuente
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      IdCategoriaFaq:
+        type: integer
+        format: int64
+      Pregunta:
+        type: string
+      Respuesta:
+        type: string
+tags:
+- name: categoriapreguntas
+  description: |
+    CategoriapreguntasController operations for Categoriapreguntas
+- name: preguntafrecuente
+  description: |
+    PreguntafrecuenteController operations for Preguntafrecuente

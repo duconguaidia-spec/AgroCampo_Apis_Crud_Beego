@@ -1,0 +1,621 @@
+swagger: "2.0"
+info:
+  title: beego Test API
+  description: |
+    beego has a very cool tools to autogenerate documents for your API
+  version: 1.0.0
+  termsOfService: http://beego.me/
+  contact:
+    email: astaxie@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /v1
+paths:
+  /categoria/:
+    get:
+      tags:
+      - categoria
+      description: |-
+        get Categoria
+        <br>
+      operationId: CategoriaController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Categoria'
+        "403":
+          description: ""
+    post:
+      tags:
+      - categoria
+      description: |-
+        create Categoria
+        <br>
+      operationId: CategoriaController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Categoria content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Categoria'
+      responses:
+        "201":
+          description: '{int} models.Categoria'
+        "403":
+          description: body is empty
+  /categoria/{id}:
+    get:
+      tags:
+      - categoria
+      description: |-
+        get Categoria by id
+        <br>
+      operationId: CategoriaController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Categoria'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - categoria
+      description: |-
+        update the Categoria
+        <br>
+      operationId: CategoriaController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Categoria content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Categoria'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Categoria'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - categoria
+      description: |-
+        delete the Categoria
+        <br>
+      operationId: CategoriaController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /respuestaforo/:
+    get:
+      tags:
+      - respuestaforo
+      description: |-
+        get Respuestaforo
+        <br>
+      operationId: RespuestaforoController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Respuestaforo'
+        "403":
+          description: ""
+    post:
+      tags:
+      - respuestaforo
+      description: |-
+        create Respuestaforo
+        <br>
+      operationId: RespuestaforoController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Respuestaforo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Respuestaforo'
+      responses:
+        "201":
+          description: '{int} models.Respuestaforo'
+        "403":
+          description: body is empty
+  /respuestaforo/{id}:
+    get:
+      tags:
+      - respuestaforo
+      description: |-
+        get Respuestaforo by id
+        <br>
+      operationId: RespuestaforoController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Respuestaforo'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - respuestaforo
+      description: |-
+        update the Respuestaforo
+        <br>
+      operationId: RespuestaforoController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Respuestaforo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Respuestaforo'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Respuestaforo'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - respuestaforo
+      description: |-
+        delete the Respuestaforo
+        <br>
+      operationId: RespuestaforoController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /temaforo/:
+    get:
+      tags:
+      - temaforo
+      description: |-
+        get Temaforo
+        <br>
+      operationId: TemaforoController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Temaforo'
+        "403":
+          description: ""
+    post:
+      tags:
+      - temaforo
+      description: |-
+        create Temaforo
+        <br>
+      operationId: TemaforoController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Temaforo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Temaforo'
+      responses:
+        "201":
+          description: '{int} models.Temaforo'
+        "403":
+          description: body is empty
+  /temaforo/{id}:
+    get:
+      tags:
+      - temaforo
+      description: |-
+        get Temaforo by id
+        <br>
+      operationId: TemaforoController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Temaforo'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - temaforo
+      description: |-
+        update the Temaforo
+        <br>
+      operationId: TemaforoController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Temaforo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Temaforo'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Temaforo'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - temaforo
+      description: |-
+        delete the Temaforo
+        <br>
+      operationId: TemaforoController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /videoeducativo/:
+    get:
+      tags:
+      - videoeducativo
+      description: |-
+        get Videoeducativo
+        <br>
+      operationId: VideoeducativoController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Videoeducativo'
+        "403":
+          description: ""
+    post:
+      tags:
+      - videoeducativo
+      description: |-
+        create Videoeducativo
+        <br>
+      operationId: VideoeducativoController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Videoeducativo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Videoeducativo'
+      responses:
+        "201":
+          description: '{int} models.Videoeducativo'
+        "403":
+          description: body is empty
+  /videoeducativo/{id}:
+    get:
+      tags:
+      - videoeducativo
+      description: |-
+        get Videoeducativo by id
+        <br>
+      operationId: VideoeducativoController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Videoeducativo'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - videoeducativo
+      description: |-
+        update the Videoeducativo
+        <br>
+      operationId: VideoeducativoController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Videoeducativo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Videoeducativo'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Videoeducativo'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - videoeducativo
+      description: |-
+        delete the Videoeducativo
+        <br>
+      operationId: VideoeducativoController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+definitions:
+  models.Categoria:
+    title: Categoria
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      NombreCategoria:
+        type: string
+  models.Respuestaforo:
+    title: Respuestaforo
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      Descripcion:
+        type: string
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      IdAutor:
+        type: integer
+        format: int64
+      IdTema:
+        type: integer
+        format: int64
+  models.Temaforo:
+    title: Temaforo
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      Descripcion:
+        type: string
+      Estado:
+        type: string
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      IdAutor:
+        type: integer
+        format: int64
+      IdCategoria:
+        type: integer
+        format: int64
+      Titulo:
+        type: string
+  models.Videoeducativo:
+    title: Videoeducativo
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      Descripcion:
+        type: string
+      Estado:
+        type: string
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      IdUsuario:
+        type: integer
+        format: int64
+      Titulo:
+        type: string
+      UrlVideo:
+        type: string
+tags:
+- name: categoria
+  description: |
+    CategoriaController operations for Categoria
+- name: respuestaforo
+  description: |
+    RespuestaforoController operations for Respuestaforo
+- name: temaforo
+  description: |
+    TemaforoController operations for Temaforo
+- name: videoeducativo
+  description: |
+    VideoeducativoController operations for Videoeducativo
