@@ -11,16 +11,18 @@ import (
 )
 
 type TrPrecioSubastaGanado struct {
-	Id                int              `orm:"column(id_precio_subasta);pk;auto"`
-	IdSubasta         *Subasta         `orm:"column(id_subasta);rel(fk)"`
-	IdCategoriaGanado *CategoriaGanado `orm:"column(id_categoria_ganado);rel(fk)"`
-	Activo            bool             `orm:"column(activo)"`
-	FechaCreacion     time.Time        `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion time.Time        `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
+	Id                int              `orm:"column(id);pk;auto" json:"id"`
+	IdSubasta         *Subasta         `orm:"column(subasta_id);rel(fk)" json:"subasta,omitempty"`
+	IdCategoriaGanado *CategoriaGanado `orm:"column(categoria_ganado_id);rel(fk)" json:"categoria,omitempty"`
+	PrecioPorKg       float64          `orm:"column(precio_por_kg)" json:"precio_por_kg"`
+	Unidad            string           `orm:"column(unidad)" json:"unidad"`
+	Activo            bool             `orm:"column(activo)" json:"activo"`
+	FechaCreacion     time.Time        `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time        `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
 }
 
 func (t *TrPrecioSubastaGanado) TableName() string {
-	return "tr_precioSubastaGanado"
+	return "precios_subasta_ganado"
 }
 
 func init() {

@@ -30,7 +30,7 @@ func main() {
 	pgHost, _ := beego.AppConfig.String("PGhost")
 	pgPort, _ := beego.AppConfig.String("PGport")
 	pgDb, _ := beego.AppConfig.String("PGdb")
-	pgSchema, _ := beego.AppConfig.String("PGschema")
+	pgSchema, _ := beego.AppConfig.String("PGsschema")
 
 	// Registrar base de datos
 	err = orm.RegisterDataBase(
@@ -77,7 +77,7 @@ func main() {
 			"x-csrftoken",
 		},
 		ExposeHeaders:    []string{"content-length"},
-		AllowCredentials: true,
+		AllowCredentials: false,
 	}))
 
 	// Ejecutar servidor

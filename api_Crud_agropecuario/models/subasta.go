@@ -11,18 +11,18 @@ import (
 )
 
 type Subasta struct {
-	Id                int       `orm:"column(id_subasta);pk;auto"`
-	FechaSubasta      time.Time `orm:"column(fecha_subasta);type(date)"`
-	Ubicacion         string    `orm:"column(ubicacion);null"`
-	Precio            float64   `orm:"column(precio)"`
-	IdUsuarioRegistra int       `orm:"column(id_usuario_registra)"`
-	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
+	Id                int       `orm:"column(id);pk;auto" json:"id"`
+	FechaSubasta      time.Time `orm:"column(fecha_subasta);type(date)" json:"fecha_subasta"`
+	Ubicacion         string    `orm:"column(ubicacion);null" json:"ubicacion,omitempty"`
+	Nombre            string    `orm:"column(nombre);null" json:"nombre,omitempty"`
+	IdUsuarioRegistra *int      `orm:"column(registrada_por);null" json:"registrada_por,omitempty"`
+	Activo            bool      `orm:"column(activo)" json:"activo"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
 }
 
 func (t *Subasta) TableName() string {
-	return "subasta"
+	return "subastas"
 }
 
 func init() {
