@@ -2,8 +2,11 @@ package main
 
 import (
 	_ "API_CRUD_VETERINARIAS/routers"
+	"errors"
 	"fmt"
 	"github.com/beego/beego/v2/server/web/filter/cors"
+	"os"
+	"path/filepath"
 
 	"github.com/beego/beego/v2/client/orm"
 	beego "github.com/beego/beego/v2/server/web"
@@ -13,9 +16,9 @@ import (
 
 func main() {
 
-	err := godotenv.Load()
+	err := loadProjectEnv()
 	if err != nil {
-		panic("Error cargando archivo .env")
+		panic(err)
 	}
 
 	// Reacargar app.conf despues de cargar el archivo .env
@@ -65,4 +68,22 @@ func main() {
 		AllowCredentials: false,
 	}))
 	beego.Run()
+}
+
+func loadProjectEnv() error {
+	dir, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+	for {
+		envPath := filepath.Join(dir, ".env")
+		if _, err := os.Stat(envPath); err == nil {
+			return godotenv.Load(envPath)
+		}
+		parent := filepath.Dir(dir)
+		if parent == dir {
+			return errors.New("no se encontró el archivo .env en la carpeta del proyecto ni en sus carpetas superiores")
+		}
+		dir = parent
+	}
 }
