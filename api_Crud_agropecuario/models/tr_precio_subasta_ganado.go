@@ -23,7 +23,7 @@ type TrPrecioSubastaGanado struct {
 }
 
 func (t *TrPrecioSubastaGanado) TableName() string {
-	return "precios_subasta_ganado"
+	return "public.precio_subasta_ganado"
 }
 
 func init() {
@@ -131,7 +131,7 @@ func GetAllTrPrecioSubastaGanado(query map[string]string, fields []string, sortb
 
 // UpdateTrPrecioSubastaGanado updates TrPrecioSubastaGanado by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateTrPrecioSubastaGanadoById(m *TrPrecioSubastaGanado) (err error) {
+func UpdateTrPrecioSubastaGanadoById(m * TrPrecioSubastaGanado) (err error) {
 	o := orm.NewOrm()
 	v := TrPrecioSubastaGanado{Id: m.Id}
 	// ascertain id exists in the database
@@ -148,11 +148,11 @@ func UpdateTrPrecioSubastaGanadoById(m *TrPrecioSubastaGanado) (err error) {
 // the record to be deleted doesn't exist
 func DeleteTrPrecioSubastaGanado(id int) (err error) {
 	o := orm.NewOrm()
-	v := TrPrecioSubastaGanado{Id: id}
+	v :=  TrPrecioSubastaGanado{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&TrPrecioSubastaGanado{Id: id}); err == nil {
+		if num, err = o.Delete(& TrPrecioSubastaGanado{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

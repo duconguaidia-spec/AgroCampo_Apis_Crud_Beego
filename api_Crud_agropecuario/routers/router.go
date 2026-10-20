@@ -28,7 +28,7 @@ func init() {
 			),
 		),
 
-		beego.NSNamespace("/tr_precioSubastaGanado",
+		beego.NSNamespace("/tr_precio_subasta_ganado",
 			beego.NSInclude(
 				&controllers.TrPrecioSubastaGanadoController{},
 			),
