@@ -33,7 +33,7 @@ func main() {
 	pgHost, _ := beego.AppConfig.String("PGhost")
 	pgPort, _ := beego.AppConfig.String("PGport")
 	pgDb, _ := beego.AppConfig.String("PGdb")
-	pgSchema, _ := beego.AppConfig.String("PGsschema")
+	pgsSchema, _ := beego.AppConfig.String("PGsschema")
 
 	// Registrar base de datos
 	err = orm.RegisterDataBase(
@@ -46,7 +46,7 @@ func main() {
 			pgPort+"/"+
 			pgDb+
 			"?sslmode=disable&search_path="+
-			pgSchema,
+			pgsSchema,
 	)
 
 	if err != nil {
@@ -83,6 +83,7 @@ func main() {
 		AllowCredentials: false,
 	}))
 
+	
 	// Ejecutar servidor
 	beego.Run()
 }

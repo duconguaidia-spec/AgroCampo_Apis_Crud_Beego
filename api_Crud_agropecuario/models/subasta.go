@@ -2,7 +2,6 @@ package models
 
 import (
 	"errors"
-	"fmt"
 	"reflect"
 	"strings"
 	"time"
@@ -10,148 +9,155 @@ import (
 	"github.com/beego/beego/v2/client/orm"
 )
 
+// Subasta es una subasta de ganado (tabla agropecuario.subastas)
 type Subasta struct {
 	Id                int       `orm:"column(id);pk;auto" json:"id"`
+	RegistradaPor     int       `orm:"column(registrada_por);null" json:"registrada_por"`
 	FechaSubasta      time.Time `orm:"column(fecha_subasta);type(date)" json:"fecha_subasta"`
-	Ubicacion         string    `orm:"column(ubicacion);null" json:"ubicacion,omitempty"`
-	Nombre            string    `orm:"column(nombre);null" json:"nombre,omitempty"`
-	IdUsuarioRegistra *int      `orm:"column(registrada_por);null" json:"registrada_por,omitempty"`
+	Ubicacion         string    `orm:"column(ubicacion);null" json:"ubicacion"`
+	Nombre            string    `orm:"column(nombre);null" json:"nombre"`
 	Activo            bool      `orm:"column(activo)" json:"activo"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp with time zone);auto_now_add" json:"fecha_creacion"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp with time zone);auto_now" json:"fecha_modificacion"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(datetime);auto_now_add" json:"fecha_creacion"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(datetime);auto_now" json:"fecha_modificacion"`
 }
 
+// nombre de la tabla (el esquema agropecuario sale del search_path en app.conf)
 func (t *Subasta) TableName() string {
-	return "subastas"
+	return "agropecuario\".\"subastas"
 }
 
 func init() {
 	orm.RegisterModel(new(Subasta))
 }
 
-// AddSubasta insert a new Subasta into database and returns
-// last inserted Id on success.
+// AddSubasta inserta una subasta nueva
 func AddSubasta(m *Subasta) (id int64, err error) {
+	if m.RegistradaPor == 0 {
+		return 0, errors.New("falta registrada_por (id de un usuario que exista)")
+	}
+	if m.FechaSubasta.IsZero() {
+		return 0, errors.New("falta fecha_subasta")
+	}
+
+	m.Id = 0
+	m.Activo = true
+
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
-	return
+	return id, err
 }
 
-// GetSubastaById retrieves Subasta by Id. Returns error if
-// Id doesn't exist
+// GetSubastaById busca una subasta por su id (si esta eliminada no la devuelve)
 func GetSubastaById(id int) (v *Subasta, err error) {
 	o := orm.NewOrm()
 	v = &Subasta{Id: id}
-	if err = o.Read(v); err == nil {
-		return v, nil
+	if err = o.Read(v); err != nil {
+		return nil, err
 	}
-	return nil, err
+	if !v.Activo {
+		return nil, errors.New("la subasta esta eliminada")
+	}
+	return v, nil
 }
 
-// GetAllSubasta retrieves all Subasta matches certain condition. Returns empty list if
-// no records exist
+// GetAllSubasta trae la lista de subastas activas
 func GetAllSubasta(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
+
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Subasta))
-	// query k=v
+	qs := o.QueryTable(new(Subasta)).Filter("activo", true)
+
+	// filtros: query=nombre:Feria,ubicacion:Bogota
 	for k, v := range query {
-		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		if strings.Contains(k, "isnull") {
-			qs = qs.Filter(k, (v == "true" || v == "1"))
-		} else {
-			qs = qs.Filter(k, v)
-		}
-	}
-	// order by:
-	var sortFields []string
-	if len(sortby) != 0 {
-		if len(sortby) == len(order) {
-			// 1) for each sort field, there is an associated order
-			for i, v := range sortby {
-				orderby := ""
-				if order[i] == "desc" {
-					orderby = "-" + v
-				} else if order[i] == "asc" {
-					orderby = v
-				} else {
-					return nil, errors.New("Error: Invalid order. Must be either [asc|desc]")
-				}
-				sortFields = append(sortFields, orderby)
-			}
-			qs = qs.OrderBy(sortFields...)
-		} else if len(sortby) != len(order) && len(order) == 1 {
-			// 2) there is exactly one order, all the sorted fields will be sorted by this order
-			for _, v := range sortby {
-				orderby := ""
-				if order[0] == "desc" {
-					orderby = "-" + v
-				} else if order[0] == "asc" {
-					orderby = v
-				} else {
-					return nil, errors.New("Error: Invalid order. Must be either [asc|desc]")
-				}
-				sortFields = append(sortFields, orderby)
-			}
-		} else if len(sortby) != len(order) && len(order) != 1 {
-			return nil, errors.New("Error: 'sortby', 'order' sizes mismatch or 'order' size is not 1")
-		}
-	} else {
-		if len(order) != 0 {
-			return nil, errors.New("Error: unused 'order' fields")
-		}
+		qs = qs.Filter(k, v)
 	}
 
-	var l []Subasta
-	qs = qs.OrderBy(sortFields...)
-	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
-		if len(fields) == 0 {
-			for _, v := range l {
-				ml = append(ml, v)
+	// orden: sortby=fecha_subasta&order=desc
+	if len(sortby) > 0 {
+		var campos []string
+		for i, campo := range sortby {
+			direccion := "asc"
+			if len(order) == 1 {
+				direccion = order[0]
+			} else if i < len(order) {
+				direccion = order[i]
 			}
-		} else {
-			// trim unused fields
-			for _, v := range l {
-				m := make(map[string]interface{})
-				val := reflect.ValueOf(v)
-				for _, fname := range fields {
-					m[fname] = val.FieldByName(fname).Interface()
-				}
-				ml = append(ml, m)
+			if direccion == "desc" {
+				campo = "-" + campo
+			} else if direccion != "asc" {
+				return nil, errors.New("order debe ser asc o desc")
 			}
+			campos = append(campos, campo)
 		}
-		return ml, nil
+		qs = qs.OrderBy(campos...)
+	} else {
+		qs = qs.OrderBy("id")
 	}
-	return nil, err
+
+	var lista []Subasta
+	_, err = qs.Limit(limit, offset).All(&lista, fields...)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, s := range lista {
+		if len(fields) == 0 {
+			ml = append(ml, s)
+			continue
+		}
+		// si pidieron solo algunos campos (fields=Id,Nombre)
+		fila := make(map[string]interface{})
+		valor := reflect.ValueOf(s)
+		for _, campo := range fields {
+			f := valor.FieldByName(campo)
+			if !f.IsValid() {
+				return nil, errors.New("el campo " + campo + " no existe")
+			}
+			fila[campo] = f.Interface()
+		}
+		ml = append(ml, fila)
+	}
+	return ml, nil
 }
 
-// UpdateSubasta updates Subasta by Id and returns error if
-// the record to be updated doesn't exist
+// UpdateSubastaById modifica una subasta
 func UpdateSubastaById(m *Subasta) (err error) {
 	o := orm.NewOrm()
 	v := Subasta{Id: m.Id}
-	// ascertain id exists in the database
-	if err = o.Read(&v); err == nil {
-		var num int64
-		if num, err = o.Update(m); err == nil {
-			fmt.Println("Number of records updated in database:", num)
-		}
+	if err = o.Read(&v); err != nil {
+		return err
 	}
-	return
+	if !v.Activo {
+		return errors.New("la subasta esta eliminada")
+	}
+
+	// lo que no se envio se queda como estaba
+	if m.RegistradaPor == 0 {
+		m.RegistradaPor = v.RegistradaPor
+	}
+	if m.FechaSubasta.IsZero() {
+		m.FechaSubasta = v.FechaSubasta
+	}
+	m.Activo = true
+	m.FechaCreacion = v.FechaCreacion
+
+	_, err = o.Update(m, "RegistradaPor", "FechaSubasta", "Ubicacion", "Nombre", "FechaModificacion")
+	return err
 }
 
-// DeleteSubasta deletes Subasta by Id and returns error if
-// the record to be deleted doesn't exist
+// DeleteSubasta no borra la fila, solo la desactiva (activo = false)
 func DeleteSubasta(id int) (err error) {
 	o := orm.NewOrm()
 	v := Subasta{Id: id}
-	// ascertain id exists in the database
-	if err = o.Read(&v); err == nil {
-		var num int64
-		if num, err = o.Delete(&Subasta{Id: id}); err == nil {
-			fmt.Println("Number of records deleted in database:", num)
-		}
+	if err = o.Read(&v); err != nil {
+		return err
 	}
-	return
+	if !v.Activo {
+		return errors.New("la subasta ya estaba eliminada")
+	}
+
+	v.Activo = false
+	_, err = o.Update(&v, "Activo", "FechaModificacion")
+	return err
 }
