@@ -154,3 +154,7 @@ func DeleteContrasena(id int) (err error) {
 	}
 	return
 }
+
+func init() {
+	orm.RegisterModel(new(Contrasena))
+}
