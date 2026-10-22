@@ -8,43 +8,49 @@
 package routers
 
 import (
-	"api_Crud_usuarios/controllers"
+    "api_Crud_usuarios/controllers"
 
-	beego "github.com/beego/beego/v2/server/web"
+    beego "github.com/beego/beego/v2/server/web"
 )
 
 func init() {
-	ns := beego.NewNamespace("/v1",
+    ns := beego.NewNamespace("/v1",
 
-		beego.NSNamespace("/Contrasena",
-			beego.NSInclude(
-				&controllers.ContrasenaController{},
-			),
-		),
+        beego.NSNamespace("/Contrasena",
+            beego.NSInclude(
+                &controllers.ContrasenaController{},
+            ),
+        ),
 
-		beego.NSNamespace("/AuditoriaUsuario",
-			beego.NSInclude(
-				&controllers.AuditoriaUsuarioController{},
-			),
-		),
+        beego.NSNamespace("/AuditoriaUsuario",
+            beego.NSInclude(
+                &controllers.AuditoriaUsuarioController{},
+            ),
+        ),
 
-		beego.NSNamespace("/PerfilExtendido",
-			beego.NSInclude(
-				&controllers.PerfilExtendidoController{},
-			),
-		),
+        beego.NSNamespace("/PerfilExtendido",
+            beego.NSInclude(
+                &controllers.PerfilExtendidoController{},
+            ),
+        ),
 
-		beego.NSNamespace("/Rol",
-			beego.NSInclude(
-				&controllers.RolController{},
-			),
-		),
+        beego.NSNamespace("/Rol",
+            beego.NSInclude(
+                &controllers.RolController{},
+            ),
+        ),
 
-		beego.NSNamespace("/Usuario",
-			beego.NSInclude(
-				&controllers.UsuarioController{},
-			),
-		),
-	)
-	beego.AddNamespace(ns)
+        beego.NSNamespace("/TokenRecuperacion",
+            beego.NSInclude(
+                &controllers.TokenRecuperacionController{},
+            ),
+        ),
+
+        beego.NSNamespace("/Usuario",
+            beego.NSInclude(
+                &controllers.UsuarioController{},
+            ),
+        ),
+    )
+    beego.AddNamespace(ns)
 }

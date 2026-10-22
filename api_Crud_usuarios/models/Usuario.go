@@ -17,7 +17,6 @@ type Usuario struct {
 	Correo            string    `orm:"column(correo)" json:"correo"`
 	Telefono          string    `orm:"column(telefono);null" json:"telefono,omitempty"`
 	IdRol             *Rol      `orm:"column(rol_id);rel(fk)" json:"rol,omitempty"`
-	PasswordHash      string    `orm:"column(password_hash)" json:"-"`
 	Avatar            string    `orm:"column(avatar_url);null" json:"avatar_url,omitempty"`
 	Verificado        bool      `orm:"column(verificado)" json:"verificado"`
 	Activo            bool      `orm:"column(activo)" json:"activo"`
