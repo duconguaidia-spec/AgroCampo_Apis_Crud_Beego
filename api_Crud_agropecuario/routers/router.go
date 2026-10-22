@@ -29,10 +29,10 @@ func init() {
 		),
 
 		beego.NSNamespace("/tr_precio_subasta_ganado",
-			beego.NSInclude(
-				&controllers.TrPrecioSubastaGanadoController{},
-			),
-		),
+	        beego.NSInclude(
+		&controllers.TrPrecioSubastaGanadoController{},
+	),
+),
 	)
 	beego.AddNamespace(ns)
 

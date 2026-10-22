@@ -23,7 +23,7 @@ type TrPrecioSubastaGanado struct {
 }
 
 func (t *TrPrecioSubastaGanado) TableName() string {
-	return "agropecuario\".\"precios_subasta_ganado"
+	return "agropecuario\".\"precio_subasta_ganado"
 }
 
 func init() {
