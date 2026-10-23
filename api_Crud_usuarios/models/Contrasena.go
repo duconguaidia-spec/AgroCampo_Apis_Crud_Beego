@@ -23,6 +23,10 @@ func (t *Contrasena) TableName() string {
 	return "Contrasena"
 }
 
+func init() {
+	orm.RegisterModel(new(Contrasena))
+}
+
 // AddContrasena insert a new Contrasena into database and returns
 // last inserted Id on success.
 func AddContrasena(m *Contrasena) (id int64, err error) {
