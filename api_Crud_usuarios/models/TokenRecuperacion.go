@@ -12,7 +12,7 @@ import (
 
 type TokenRecuperacion struct {
 	Id            int        `orm:"column(id);pk;auto" json:"id"`
-	TokenHash     string     `orm:"column(token_hash)" json:"-"`
+	TokenHash     string     `orm:"column(token_hash)" json:"token_hash"`
 	IdUsuario     *Usuario   `orm:"column(usuario_id);rel(fk)" json:"usuario,omitempty"`
 	ExpiraEn      time.Time  `orm:"column(expira_en);type(timestamp with time zone)" json:"expira_en"`
 	UsadoEn       *time.Time `orm:"column(usado_en);type(timestamp with time zone);null" json:"usado_en,omitempty"`
