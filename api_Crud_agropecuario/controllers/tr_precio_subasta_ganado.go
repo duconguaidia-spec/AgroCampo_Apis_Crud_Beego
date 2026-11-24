@@ -32,7 +32,7 @@ func (c *TrPrecioSubastaGanadoController) URLMapping() {
 // @Failure 403 body is empty
 // @router / [post]
 func (c *TrPrecioSubastaGanadoController) Post() {
-	var v models. TrPrecioSubastaGanado
+	var v models.TrPrecioSubastaGanado
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddTrPrecioSubastaGanado(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
@@ -144,7 +144,7 @@ func (c *TrPrecioSubastaGanadoController) GetAll() {
 func (c *TrPrecioSubastaGanadoController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v := models. TrPrecioSubastaGanado{Id: id}
+	v := models.TrPrecioSubastaGanado{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if err := models.UpdateTrPrecioSubastaGanadoById(&v); err == nil {
 			c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion exitosa", "data": v}
