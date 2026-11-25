@@ -14,6 +14,7 @@ import (
 )
 
 func init() {
+	beego.Router("/v1/categorias/", &controllers.CatalogoController{}, "get:Get")
 	ns := beego.NewNamespace("/v1",
 
 		beego.NSNamespace("/noticias",

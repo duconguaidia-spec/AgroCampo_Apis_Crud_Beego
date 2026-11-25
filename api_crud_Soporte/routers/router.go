@@ -15,6 +15,7 @@ import (
 )
 
 func init() {
+	beego.Router("/v1/tickets/", &controllers.TicketsController{}, "post:Post")
 	ns := beego.NewNamespace("/v1",
 
 		beego.NSNamespace("/categoriapreguntas",

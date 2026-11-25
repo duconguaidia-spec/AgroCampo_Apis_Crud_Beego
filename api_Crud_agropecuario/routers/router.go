@@ -14,6 +14,9 @@ import (
 )
 
 func init() {
+	beego.Router("/v1/sector/", &controllers.SectorController{}, "get:Get")
+	beego.Router("/v1/cotizaciones/", &controllers.SectorController{}, "get:Cotizaciones")
+	beego.Router("/v1/precio-subasta/", &controllers.PrecioSubastaController{}, "post:Post")
 	ns := beego.NewNamespace("/v1",
 
 		beego.NSNamespace("/categoria_ganado",
@@ -29,10 +32,10 @@ func init() {
 		),
 
 		beego.NSNamespace("/tr_precio_subasta_ganado",
-	        beego.NSInclude(
-		&controllers.TrPrecioSubastaGanadoController{},
-	),
-),
+			beego.NSInclude(
+				&controllers.TrPrecioSubastaGanadoController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 

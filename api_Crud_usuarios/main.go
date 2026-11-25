@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/beego/beego/v2/client/orm"
+	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 	"github.com/beego/beego/v2/server/web/filter/cors"
 	"github.com/joho/godotenv"
@@ -23,6 +24,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	configurarClaveInterna()
 
 	pgUser, _ := beego.AppConfig.String("PGuser")
 	pgPass, _ := beego.AppConfig.String("PGpass")
@@ -76,6 +78,19 @@ func main() {
 	}))
 
 	beego.Run()
+}
+
+func configurarClaveInterna() {
+	datos, err := godotenv.Read(filepath.Join("..", ".env"))
+	if err != nil && !errors.Is(err, os.ErrNotExist) {
+		logs.Warn("No se pudo leer la clave interna desde el .env compartido")
+	}
+	if clave, existe := datos["AGROCAMPO_CLAVE_INTERNA"]; existe {
+		beego.AppConfig.Set("clave_interna", clave)
+	}
+	if len(beego.AppConfig.DefaultString("clave_interna", "")) < 32 {
+		logs.Warn("Usuarios requiere AGROCAMPO_CLAVE_INTERNA de al menos 32 caracteres")
+	}
 }
 
 func loadProjectEnv() error {
