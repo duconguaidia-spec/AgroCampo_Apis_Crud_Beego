@@ -1,6 +1,7 @@
 package main
 
 import (
+	"api_Crud_usuarios/controllers"
 	_ "api_Crud_usuarios/routers"
 	"errors"
 	"os"
@@ -46,6 +47,10 @@ func main() {
 			pgSchema,
 	)
 	if err != nil {
+		panic(err)
+	}
+
+	if err := controllers.ConfigurarAlmacenContrasenas(); err != nil {
 		panic(err)
 	}
 

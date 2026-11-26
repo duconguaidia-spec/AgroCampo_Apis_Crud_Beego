@@ -73,7 +73,7 @@ func (c *CuentaController) Operar() {
 			c.resultado(500, nil, "No se pudo preparar la contraseña")
 			return
 		}
-		err = db.QueryRowContext(ctx, `INSERT INTO usuarios.usuarios (nombre,apellido,correo,telefono,password_hash,rol_id) SELECT $1,$2,$3,$4,$5,id FROM usuarios.roles WHERE nombre=$6 AND activo ON CONFLICT(correo) DO NOTHING RETURNING id`, d.Nombre, d.Apellido, d.Correo, d.Telefono, string(hash), d.Rol).Scan(&d.ID)
+		err = db.QueryRowContext(ctx, consultaRegistro, d.Nombre, d.Apellido, d.Correo, d.Telefono, string(hash), d.Rol).Scan(&d.ID)
 		if errors.Is(err, sql.ErrNoRows) {
 			c.resultado(409, nil, "El correo ya está registrado o el rol no está disponible")
 			return
@@ -85,7 +85,7 @@ func (c *CuentaController) Operar() {
 		c.resultado(201, map[string]int{"id": d.ID}, "")
 	case "login":
 		var hash string
-		err := db.QueryRowContext(ctx, `SELECT u.id,u.nombre,u.apellido,r.nombre,u.password_hash FROM usuarios.usuarios u JOIN usuarios.roles r ON r.id=u.rol_id WHERE u.correo=$1 AND u.activo AND r.activo`, d.Correo).Scan(&d.ID, &d.Nombre, &d.Apellido, &d.Rol, &hash)
+		err := db.QueryRowContext(ctx, consultaLogin, d.Correo).Scan(&d.ID, &d.Nombre, &d.Apellido, &d.Rol, &hash)
 		if err != nil && !errors.Is(err, sql.ErrNoRows) {
 			c.resultado(500, nil, "No se pudo consultar la cuenta")
 			return
@@ -158,7 +158,7 @@ func (c *CuentaController) Operar() {
 			c.resultado(500, nil, "No se pudo preparar la contraseña")
 			return
 		}
-		err = db.QueryRowContext(ctx, `WITH token AS (UPDATE usuarios.tokens_recuperacion SET usado_en=now() WHERE token_hash=$1 AND usado_en IS NULL AND expira_en>now() RETURNING usuario_id) UPDATE usuarios.usuarios SET password_hash=$2 WHERE activo AND id=(SELECT usuario_id FROM token) RETURNING id`, d.Token, string(hash)).Scan(&d.ID)
+		d.ID, err = restablecerContrasena(ctx, db, d.Token, string(hash))
 		if errors.Is(err, sql.ErrNoRows) {
 			c.resultado(400, nil, "Enlace inválido o expirado")
 			return
