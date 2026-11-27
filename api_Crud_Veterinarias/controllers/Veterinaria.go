@@ -140,6 +140,9 @@ func (c *VeterinariaController) GetAll() {
 // @Failure 403 :id is not int
 // @router /:id [put]
 func (c *VeterinariaController) Put() {
+	if !autorizarEdicionInterna(&c.Controller) {
+		return
+	}
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v := models.Veterinaria{Id: id}

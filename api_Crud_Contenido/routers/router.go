@@ -14,6 +14,7 @@ import (
 )
 
 func init() {
+	beego.Router("/v1/temaforo/:id", &controllers.TemaforoController{}, "patch:Editar")
 	beego.Router("/v1/guardados/", &controllers.GuardadosController{}, "post:Post")
 	beego.Router("/v1/guardados/:usuario", &controllers.GuardadosController{}, "get:Get")
 	ns := beego.NewNamespace("/v1",

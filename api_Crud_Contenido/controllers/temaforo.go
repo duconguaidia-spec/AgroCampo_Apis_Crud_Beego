@@ -144,6 +144,9 @@ func (c *TemaforoController) GetAll() {
 // @Failure 403 :id is not int
 // @router /:id [put]
 func (c *TemaforoController) Put() {
+	if !c.autorizarEdicionInterna() {
+		return
+	}
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v := models.Temaforo{Id: id}
